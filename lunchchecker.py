@@ -6,6 +6,7 @@ from requests   import get, post
 from json       import dumps
 from datetime   import datetime
 from bs4        import BeautifulSoup
+from random     import choice
 
 day = datetime.today().weekday()
 time = datetime.now().time()
@@ -76,7 +77,7 @@ def GetMenuBuddha():
     soups = findall("</span>(.*?)22,",str(menu[:2]),DOTALL) #looks for soups for all week
     first_meals = findall("22,- Kč(.*?)95",str(menu[:2]),DOTALL) #looks for all meals
     menu_extracted = sub(r'[\t\n\r]','',str(menu).replace("<br/>", "")
-                                                    .replace("&amp;", " a "))
+                                                 .replace("&amp;", " a "))
 
     if(day == 0):
         menu_extracted_day =  findall("PONDĚLÍ(.*?)ÚTERÝ",menu_extracted,DOTALL) #onlz monday text
@@ -241,7 +242,48 @@ def PostMenu(menu_dict):
     headers = {'content-type': 'application/json'}
     response = post(url, data=dumps(payload), headers=headers)
 
+def PostFortuneCookie():
+    cookie_archive = [
+        'Your smile will tell you what makes you feel good.',
+        'Don’t panic',
+        'It could be better, but it’s good enough.',
+        'Two days from now, tomorrow will be yesterday.',
+        'Stop eating now. Food poisoning no fun.',
+        'Person who eat fortune cookie get lousy dessert.',
+        'Soup was secret family recipe made from toad. Hope you liked!',
+        'You will soon have an out of money experience.',
+        'Two can live as cheaply as one, for half as long.',
+        'Give person fish, he eat for day. Teach person to fish, he always smell funny.',
+        'Ignore last cookie!',
+        'The end is near, might as well have dessert.',
+        'This fortune no good. Try another.',
+        'Run!',
+        'Make love, not bugs!',
+        'I cannot help you, for I’m just a cookie.',
+        'The fortune you seek, is in another cookie.',
+        'Don’t eat any Chinese food today or you’ll be sick!',
+        'Come back later….I’m sleeping (yes, cookies need their sleep too).',
+        'You will die alone and poorly dressed.',
+        'If you can read this, you are literate. Congratulations!',
+        'Your existence is pointless.'
+    ]
 
+    body =      "\nFortune Cookie of the Day\n" \
+                                +               \
+            "\n**" + choice(cookie_archive) + "**\n\n"
+
+    url = 'https://hooks.glip.com/webhook/0a6f78d2-cf25-49d5-aeae-25a10fbb6262' #Test conv
+    #url = 'https://hooks.glip.com/webhook/feb6da0f-1cbe-4719-b0af-a1f0e871f885' #CASUAL: Oběd
+
+    payload = \
+    {
+	'body':body
+    }
+
+    headers = {'content-type': 'application/json'}
+    response = post(url, data=dumps(payload), headers=headers)
+
+PostFortuneCookie()
 PostMenu(GetMenuVarna())
 PostMenu(GetMenuBuddha())
 PostMenu(GetMenuOsmicka())
