@@ -25,6 +25,9 @@ if day == 5 or day == 6:
 days_of_week = ['pondělí','úterý','středa','čtvrtek','pátek']
 
 def GetMenuVarna():
+    '''
+    Get Varna lunch menu.
+    '''
     varna = dict()
     varna["Menu 1"] = dict()
     varna["Menu 2"] = dict()
@@ -65,6 +68,9 @@ def GetMenuVarna():
 
 
 def GetMenuBuddha():
+    '''
+    Get Buddha lunch menu.
+    '''
     buddha = {"url":"http://www.indian-restaurant-buddha.cz/index.html"}
     buddha["Name"] = "Buddha Indická a Nepálská Restaurace"
     buddha["Info"] = "Příloha ke každému jídlu (v ceně): Tandoori Nan (indický chléb) / indická rýže Basmati / kombinace obou příloh. Polévka se podává zvlášť/soup is served separately from menu. (22 Kč)"
@@ -114,6 +120,9 @@ def GetMenuBuddha():
 
 
 def GetMenuOsmicka():
+    '''
+    Get Osmicka lunch menu.
+    '''
     osmicka = {"url":"http://www.naosmicce.cz/Menu.pdf"}
     osmicka["Name"] = "Bistro na Osmičce - Burger and Pasta"
     osmicka["Info"] = "Polévka dle denní nabídky je během doby poledního menu zahrnuta v ceně!"
@@ -135,7 +144,7 @@ def GetMenuOsmicka():
          menu_extracted_day =  findall("Středa(.*?)Čtvrtek",menu_extracted,DOTALL) #onlz monday text
     elif(day == 3):
         menu_extracted_day = findall("Čtvrtek(.*?)Pátek",menu_extracted,DOTALL) #onlz monday text
-    elif(day == 3):
+    elif(day == 4):
         menu_extracted_day = findall("Pátek(.*?)Sobota",menu_extracted,DOTALL) #onlz monday text
 
     osmicka["Polévka"] = findall("Polévka:(.*?)<",menu_extracted_day[0],DOTALL)[0]
@@ -164,6 +173,9 @@ def GetMenuOsmicka():
 
 
 def GetMenuGoldenNepal():
+    '''
+    Get Golden Nepal lunch menu.
+    '''
     GoldenNepal = {"url":"http://goldennepal.cz/"}
     GoldenNepal["Name"] = "Nepálská restaurace a bar"
     GoldenNepal["Info"] = "Ke každému jídlu ve všední den příloha rýže/placka/kombinace ZDARMA. Všechna jídla kromě Vindaloo, Jalfrezi, Madrasu a Falu obsahují smetanu. Všechny polévky obsahují mouku. KOrma obsahuje ořechy. Chicken Tikka Masala, Butter Chicken a Vindaloo obsahují barvivo."
@@ -213,6 +225,9 @@ def GetMenuGoldenNepal():
 
 
 def PostMenu(menu_dict, url):
+    '''
+    Send given menu to given Glip URL
+    '''
 
 
     body = menu_dict["url"] + "\n"
@@ -245,7 +260,9 @@ def PostMenu(menu_dict, url):
 
 
 def PostRestaurantsLinks(url):
-
+    '''
+    Send restaurants names and lunch menu links to given Glip URL.
+    '''
     links = {
         '**BlackPointCafe**' : 'http://www.blackpointcafe.cz/denni-menu/',
         '**King´s Head**' : 'http://kingshead.cz/denni-menu/',
@@ -254,10 +271,9 @@ def PostRestaurantsLinks(url):
         '**Annapurna**' : 'http://indicka-restaurace-annapurna.cz/index.php?option=com_content&view=article&id=2&Itemid=118',
         '**Everest**' : 'http://www.restauraceeverest.cz/poledni-menu.html',
         '**Satyam**' : 'http://www.satyam.cz/cs/denni-menu.aspx',
-        '**Stern**' : 'https://www.restu.cz/stern-1888-original-restaurant/denni-menu/'
-
+        '**Stern**' : 'https://www.restu.cz/stern-1888-original-restaurant/denni-menu/',
+        '**La Spernaza**' : 'http://lasperanza-bistro.cz/menu-complete/'
     }
-
 
     body = '**Ostatní restaurace:**\n'
 
@@ -275,6 +291,9 @@ def PostRestaurantsLinks(url):
 
 
 def PostFortuneCookie(url):
+    '''
+    Send randomly chosen fortune cookie to given Glip URL.
+    '''
     cookie_archive = [
         'Your smile will tell you what makes you feel good.',
         'Don’t panic',
@@ -306,15 +325,15 @@ def PostFortuneCookie(url):
 
     payload = \
     {
-	'body':body
+	   'body' : body
     }
 
     headers = {'content-type': 'application/json'}
     response = post(url, data=dumps(payload), headers=headers)
 
-#PostFortuneCookie(url)
-#PostMenu(GetMenuVarna(),url)
-#PostMenu(GetMenuBuddha(),url)
-#PostMenu(GetMenuOsmicka(),url)
-#PostMenu(GetMenuGoldenNepal(),url)
+PostFortuneCookie(url)
+PostMenu(GetMenuVarna(),url)
+PostMenu(GetMenuBuddha(),url)
+PostMenu(GetMenuOsmicka(),url)
+PostMenu(GetMenuGoldenNepal(),url)
 PostRestaurantsLinks(url)
