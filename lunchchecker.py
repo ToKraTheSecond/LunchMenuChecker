@@ -8,6 +8,9 @@ from datetime   import datetime
 from bs4        import BeautifulSoup
 from random     import choice
 
+url = 'https://hooks.glip.com/webhook/0a6f78d2-cf25-49d5-aeae-25a10fbb6262' #Test conv
+#url = 'https://hooks.glip.com/webhook/feb6da0f-1cbe-4719-b0af-a1f0e871f885' #CASUAL: Oběd
+
 day = datetime.today().weekday()
 time = datetime.now().time()
 
@@ -209,7 +212,7 @@ def GetMenuGoldenNepal():
     return GoldenNepal
 
 
-def PostMenu(menu_dict):
+def PostMenu(menu_dict, url):
 
 
     body = menu_dict["url"] + "\n"
@@ -230,8 +233,6 @@ def PostMenu(menu_dict):
     if "Menu 5" in menu_dict.keys():
         body += "**Menu 5:** " + menu_dict["Menu 5"]["menu"] + " - " + str(menu_dict["Menu 5"]["cena"]) + "\n"
 
-    url = 'https://hooks.glip.com/webhook/0a6f78d2-cf25-49d5-aeae-25a10fbb6262' #Test conv
-    #url = 'https://hooks.glip.com/webhook/feb6da0f-1cbe-4719-b0af-a1f0e871f885' #CASUAL: Oběd
     payload = \
     {
     'activity':menu_dict["Name"],
@@ -242,7 +243,23 @@ def PostMenu(menu_dict):
     headers = {'content-type': 'application/json'}
     response = post(url, data=dumps(payload), headers=headers)
 
-def PostFortuneCookie():
+
+def PostRestaurantsLinks(url):
+
+
+
+    payload = \
+    {
+    'activity':menu_dict["Name"],
+	'icon':menu_dict["Icon"],
+	'body':body
+    }
+
+    headers = {'content-type': 'application/json'}
+    response = post(url, data=dumps(payload), headers=headers)
+
+
+def PostFortuneCookie(url):
     cookie_archive = [
         'Your smile will tell you what makes you feel good.',
         'Don’t panic',
@@ -272,9 +289,6 @@ def PostFortuneCookie():
                                 +               \
             "\n**" + choice(cookie_archive) + "**\n\n"
 
-    url = 'https://hooks.glip.com/webhook/0a6f78d2-cf25-49d5-aeae-25a10fbb6262' #Test conv
-    #url = 'https://hooks.glip.com/webhook/feb6da0f-1cbe-4719-b0af-a1f0e871f885' #CASUAL: Oběd
-
     payload = \
     {
 	'body':body
@@ -283,8 +297,8 @@ def PostFortuneCookie():
     headers = {'content-type': 'application/json'}
     response = post(url, data=dumps(payload), headers=headers)
 
-PostFortuneCookie()
-PostMenu(GetMenuVarna())
-PostMenu(GetMenuBuddha())
-PostMenu(GetMenuOsmicka())
-PostMenu(GetMenuGoldenNepal())
+PostFortuneCookie(url)
+PostMenu(GetMenuVarna(),url)
+PostMenu(GetMenuBuddha(),url)
+PostMenu(GetMenuOsmicka(),url)
+PostMenu(GetMenuGoldenNepal(),url)
