@@ -246,12 +246,27 @@ def PostMenu(menu_dict, url):
 
 def PostRestaurantsLinks(url):
 
+    links = {
+        '**BlackPointCafe**' : 'http://www.blackpointcafe.cz/denni-menu/',
+        '**King´s Head**' : 'http://kingshead.cz/denni-menu/',
+        '**Zelená Kočka - Solniční**' : 'http://www.zelenakocka.cz/index2.php',
+        '**Tulip**' : 'http://tulip-restaurant.cz/cs/menu/',
+        '**Annapurna**' : 'http://indicka-restaurace-annapurna.cz/index.php?option=com_content&view=article&id=2&Itemid=118',
+        '**Everest**' : 'http://www.restauraceeverest.cz/poledni-menu.html',
+        '**Satyam**' : 'http://www.satyam.cz/cs/denni-menu.aspx',
+        '**Stern**' : 'https://www.restu.cz/stern-1888-original-restaurant/denni-menu/'
 
+    }
+
+
+    body = '**Ostatní restaurace:**\n'
+
+    for key in links:
+        body +=  key + ": \n"
+        body +=  links.get(key) + "\n"
 
     payload = \
     {
-    'activity':menu_dict["Name"],
-	'icon':menu_dict["Icon"],
 	'body':body
     }
 
@@ -297,8 +312,9 @@ def PostFortuneCookie(url):
     headers = {'content-type': 'application/json'}
     response = post(url, data=dumps(payload), headers=headers)
 
-PostFortuneCookie(url)
-PostMenu(GetMenuVarna(),url)
-PostMenu(GetMenuBuddha(),url)
-PostMenu(GetMenuOsmicka(),url)
-PostMenu(GetMenuGoldenNepal(),url)
+#PostFortuneCookie(url)
+#PostMenu(GetMenuVarna(),url)
+#PostMenu(GetMenuBuddha(),url)
+#PostMenu(GetMenuOsmicka(),url)
+#PostMenu(GetMenuGoldenNepal(),url)
+PostRestaurantsLinks(url)
