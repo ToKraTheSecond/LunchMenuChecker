@@ -384,7 +384,6 @@ def PostFortuneCookie(url):
     headers = {'content-type': 'application/json'}
     response = post(url, data=dumps(payload), headers=headers)
 
-PostFortuneCookie(url)
 PostMenu(GetMenuVarna(),url)
 PostMenu(GetMenuBuddha(),url)
 PostMenu(GetMenuOsmicka(),url)
@@ -392,3 +391,5 @@ PostMenu(GetMenuGoldenNepal(),url)
 PostMenu(GetMenuSabaidy(),url)
 
 PostRestaurantsLinks(url)
+
+PostFortuneCookie(url)
