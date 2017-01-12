@@ -386,9 +386,9 @@ def PostFortuneCookie(url):
 
 PostMenu(GetMenuVarna(),url)
 PostMenu(GetMenuBuddha(),url)
-PostMenu(GetMenuOsmicka(),url)
 PostMenu(GetMenuGoldenNepal(),url)
 PostMenu(GetMenuSabaidy(),url)
+PostMenu(GetMenuOsmicka(),url)
 
 PostRestaurantsLinks(url)
 
