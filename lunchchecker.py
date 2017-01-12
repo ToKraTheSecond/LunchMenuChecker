@@ -389,5 +389,6 @@ PostMenu(GetMenuVarna(),url)
 PostMenu(GetMenuBuddha(),url)
 PostMenu(GetMenuOsmicka(),url)
 PostMenu(GetMenuGoldenNepal(),url)
-PostRestaurantsLinks(url)
 PostMenu(GetMenuSabaidy(),url)
+
+PostRestaurantsLinks(url)
