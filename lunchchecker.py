@@ -224,6 +224,58 @@ def GetMenuGoldenNepal():
     return GoldenNepal
 
 
+def GetMenuSabaidy():
+    ''''
+    Get Sabaidy lunch menu
+    '''
+    Sabaidy = {"url":"http://www.amphone.eu/restaurace"}
+    Sabaidy["Name"] = "Thajsko-laoská restaurace"
+    Sabaidy["Info"] = "Polední menu podáváme každý všední den od 11 do 14 hodin. Polévka v ceně menu."
+    Sabaidy["Icon"] = "http://goldennepal.cz/wp-content/uploads/2016/06/logotext.png"
+    Sabaidy["CardPay"] = "Ano"
+
+    r = get("http://www.amphone.eu/restaurace")
+    r.encoding = 'utf-8'
+
+    soup = BeautifulSoup(r.text, "html5lib") #gets html code
+    menu = soup.findAll("div",{"class","uk-width-medium-1-2 uk-container-center"})
+    menu_extracted = sub(r'[\t\n\r]','',str(soup))
+
+    if(day == 0):
+        menu_extracted_day =  findall("Pondělí(.*?)Úterý",menu_extracted,DOTALL) #onlz monday text
+    elif(day == 1):
+        menu_extracted_day =  findall("Úterý(.*?)Středa",menu_extracted,DOTALL) #onlz monday text
+    elif(day == 2):
+         menu_extracted_day =  findall("Středa(.*?)Čtvrtek",menu_extracted,DOTALL) #onlz monday text
+    elif(day == 3):
+        menu_extracted_day = findall("Čtvrtek(.*?)Pátek",menu_extracted,DOTALL) #onlz monday text
+    elif(day == 3):
+        menu_extracted_day = findall("Pátek(.*?)ubytovani",menu_extracted,DOTALL) #onlz monday text
+
+    menu_courses = findall(r"<li>(.*?)\b[0-9]",menu_extracted_day[0],DOTALL)
+    menu_prices = findall(r"\b([0-9]{2,3}?),-",menu_extracted_day[0],DOTALL)
+
+    Sabaidy["Polévka"] = findall(r"m>(.*?)</",menu_extracted_day[0],DOTALL)[0]
+
+    Sabaidy["Menu 1"] = dict()
+    Sabaidy["Menu 1"]["menu"] = menu_courses[0]
+    Sabaidy["Menu 1"]["cena"] = menu_prices[0]
+
+    Sabaidy["Menu 2"] = dict()
+    Sabaidy["Menu 2"]["menu"] = menu_courses[1]
+    Sabaidy["Menu 2"]["cena"] = menu_prices[1]
+
+    Sabaidy["Menu 3"] = dict()
+    Sabaidy["Menu 3"]["menu"] = menu_courses[2]
+    Sabaidy["Menu 3"]["cena"] = menu_prices[2]
+
+    Sabaidy["Menu 4"] = dict()
+    Sabaidy["Menu 4"]["menu"] = menu_courses[3]
+    Sabaidy["Menu 4"]["cena"] = menu_prices[3]
+
+    return Sabaidy
+
+
 def PostMenu(menu_dict, url):
     '''
     Send given menu to given Glip URL
@@ -272,7 +324,8 @@ def PostRestaurantsLinks(url):
         '**Everest**' : 'http://www.restauraceeverest.cz/poledni-menu.html',
         '**Satyam**' : 'http://www.satyam.cz/cs/denni-menu.aspx',
         '**Stern**' : 'https://www.restu.cz/stern-1888-original-restaurant/denni-menu/',
-        '**La Spernaza**' : 'http://lasperanza-bistro.cz/menu-complete/'
+        '**La Spernaza**' : 'http://lasperanza-bistro.cz/menu-complete/',
+        '**Pivnice Pegas**' : 'http://brnorestauracepivnice.hotelpegas.cz/denni-menu/'
     }
 
     body = '**Ostatní restaurace:**\n'
@@ -337,3 +390,4 @@ PostMenu(GetMenuBuddha(),url)
 PostMenu(GetMenuOsmicka(),url)
 PostMenu(GetMenuGoldenNepal(),url)
 PostRestaurantsLinks(url)
+PostMenu(GetMenuSabaidy(),url)
