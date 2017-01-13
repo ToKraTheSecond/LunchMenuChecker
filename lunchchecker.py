@@ -96,6 +96,8 @@ def GetMenuBuddha():
          menu_extracted_day =  findall("STŘEDA(.*?)ČTVRTEK",menu_extracted,DOTALL) #onlz monday text
     elif(day == 3):
         menu_extracted_day = findall("ČTVRTEK(.*?)PÁTEK",menu_extracted,DOTALL) #onlz monday text
+    elif(day == 4):
+        menu_extracted_day = findall("PÁTEK(.*?)ALERGENY",menu_extracted,DOTALL) #onlz monday text
 
 
     buddha["Polévka"] = findall("Polévka:(.*?)22,- Kč",menu_extracted_day[0],DOTALL)[0]
@@ -178,7 +180,7 @@ def GetMenuGoldenNepal():
     '''
     GoldenNepal = {"url":"http://goldennepal.cz/"}
     GoldenNepal["Name"] = "Nepálská restaurace a bar"
-    GoldenNepal["Info"] = "Ke každému jídlu ve všední den příloha rýže/placka/kombinace ZDARMA. Všechna jídla kromě Vindaloo, Jalfrezi, Madrasu a Falu obsahují smetanu. Všechny polévky obsahují mouku. KOrma obsahuje ořechy. Chicken Tikka Masala, Butter Chicken a Vindaloo obsahují barvivo."
+    GoldenNepal["Info"] = "Ke každému jídlu ve všední den příloha rýže/placka/kombinace ZDARMA. Všechna jídla kromě Vindaloo, Jalfrezi, Madrasu a Falu obsahují smetanu. Všechny polévky obsahují mouku. Korma obsahuje ořechy. Chicken Tikka Masala, Butter Chicken a Vindaloo obsahují barvivo."
     GoldenNepal["Icon"] = "http://goldennepal.cz/wp-content/uploads/2016/06/logotext.png"
     GoldenNepal["CardPay"] = "Ano"
 
@@ -197,7 +199,7 @@ def GetMenuGoldenNepal():
          menu_extracted_day =  findall("Středa(.*?)Čtvrtek",menu_extracted,DOTALL) #onlz monday text
     elif(day == 3):
         menu_extracted_day = findall("Čtvrtek(.*?)Pátek",menu_extracted,DOTALL) #onlz monday text
-    elif(day == 3):
+    elif(day == 4):
         menu_extracted_day = findall("Pátek(.*?)Sobota",menu_extracted,DOTALL) #onlz monday text
 
     menu_courses = findall(r"content\">(.*?)</",menu_extracted_day[0],DOTALL)
@@ -229,7 +231,7 @@ def GetMenuSabaidy():
     Get Sabaidy lunch menu
     '''
     Sabaidy = {"url":"http://www.amphone.eu/restaurace"}
-    Sabaidy["Name"] = "Thajsko-laoská restaurace"
+    Sabaidy["Name"] = "Sabaidy: Thajsko-laoská restaurace"
     Sabaidy["Info"] = "Polední menu podáváme každý všední den od 11 do 14 hodin. Polévka v ceně menu."
     Sabaidy["Icon"] = "http://goldennepal.cz/wp-content/uploads/2016/06/logotext.png"
     Sabaidy["CardPay"] = "Ano"
@@ -249,7 +251,7 @@ def GetMenuSabaidy():
          menu_extracted_day =  findall("Středa(.*?)Čtvrtek",menu_extracted,DOTALL) #onlz monday text
     elif(day == 3):
         menu_extracted_day = findall("Čtvrtek(.*?)Pátek",menu_extracted,DOTALL) #onlz monday text
-    elif(day == 3):
+    elif(day == 4):
         menu_extracted_day = findall("Pátek(.*?)ubytovani",menu_extracted,DOTALL) #onlz monday text
 
     menu_courses = findall(r"<li>(.*?)\b[0-9]",menu_extracted_day[0],DOTALL)
