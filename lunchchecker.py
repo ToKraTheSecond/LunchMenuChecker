@@ -1,12 +1,13 @@
 '''
 Post lunch menu from chosen restaurants to Glip chat.
 '''
-from re         import search, findall, DOTALL, sub
-from requests   import get, post
-from json       import dumps
-from datetime   import datetime
-from bs4        import BeautifulSoup
-from random     import choice
+
+from re import search, findall, DOTALL, sub
+from requests import get, post
+from json import dumps
+from datetime import datetime
+from bs4 import BeautifulSoup
+from random import choice
 
 url = 'https://hooks.glip.com/webhook/0a6f78d2-cf25-49d5-aeae-25a10fbb6262' #Test conv
 #url = 'https://hooks.glip.com/webhook/feb6da0f-1cbe-4719-b0af-a1f0e871f885' #CASUAL: Oběd
@@ -22,12 +23,13 @@ if time.hour > 15:
 if day == 5 or day == 6:
     day = 0
 
-days_of_week = ['pondělí','úterý','středa','čtvrtek','pátek']
-
 def GetMenuVarna():
     '''
     Get Varna lunch menu.
     '''
+
+    days_of_week = ['pondělí','úterý','středa','čtvrtek','pátek']
+
     varna = dict()
     varna["Menu 1"] = dict()
     varna["Menu 2"] = dict()
@@ -71,6 +73,7 @@ def GetMenuBuddha():
     '''
     Get Buddha lunch menu.
     '''
+
     buddha = {"url":"http://www.indian-restaurant-buddha.cz/index.html"}
     buddha["Name"] = "Buddha Indická a Nepálská Restaurace"
     buddha["Info"] = "Příloha ke každému jídlu (v ceně): Tandoori Nan (indický chléb) / indická rýže Basmati / kombinace obou příloh. Polévka se podává zvlášť/soup is served separately from menu. (22 Kč)"
@@ -99,12 +102,10 @@ def GetMenuBuddha():
     elif(day == 4):
         menu_extracted_day = findall("PÁTEK(.*?)ALERGENY",menu_extracted,DOTALL) #onlz monday text
 
-
     buddha["Polévka"] = findall("Polévka:(.*?)22,- Kč",menu_extracted_day[0],DOTALL)[0]
     buddha["Menu 1"] = dict()
     buddha["Menu 1"]["menu"] = findall("22,- Kč(.*?)95,- Kč",menu_extracted_day[0],DOTALL)[0]
     buddha["Menu 1"]["cena"] = 95
-
 
     buddha["Menu 2"] = dict()
     buddha["Menu 2"]["menu"] = findall("95,- Kč(.*?)95,- Kč",menu_extracted_day[0],DOTALL)[0]
@@ -125,6 +126,7 @@ def GetMenuOsmicka():
     '''
     Get Osmicka lunch menu.
     '''
+
     osmicka = {"url":"http://www.naosmicce.cz/Menu.pdf"}
     osmicka["Name"] = "Bistro na Osmičce - Burger and Pasta"
     osmicka["Info"] = "Polévka dle denní nabídky je během doby poledního menu zahrnuta v ceně!"
@@ -158,7 +160,8 @@ def GetMenuOsmicka():
 
     menu_types = findall(r"\"nabidka_1\">(.*?)<",menu_extracted_day[0],DOTALL)
 
-    if len(menu_types) > 3:
+    if len(menu_types) > 3: #bug at source web: long menu is shown as two menus
+        #this can cause problems if the long menu is not the first one
         osmicka["Menu 1"]["menu"] = menu_types[0] +  " " + menu_types[1]
         osmicka["Menu 2"]["menu"] = menu_types[2]
         osmicka["Menu 3"]["menu"] = menu_types[3]
@@ -178,6 +181,7 @@ def GetMenuGoldenNepal():
     '''
     Get Golden Nepal lunch menu.
     '''
+
     GoldenNepal = {"url":"http://goldennepal.cz/"}
     GoldenNepal["Name"] = "Nepálská restaurace a bar"
     GoldenNepal["Info"] = "Ke každému jídlu ve všední den příloha rýže/placka/kombinace ZDARMA. Všechna jídla kromě Vindaloo, Jalfrezi, Madrasu a Falu obsahují smetanu. Všechny polévky obsahují mouku. Korma obsahuje ořechy. Chicken Tikka Masala, Butter Chicken a Vindaloo obsahují barvivo."
@@ -230,6 +234,7 @@ def GetMenuSabaidy():
     ''''
     Get Sabaidy lunch menu
     '''
+
     Sabaidy = {"url":"http://www.amphone.eu/restaurace"}
     Sabaidy["Name"] = "Sabaidy: Thajsko-laoská restaurace"
     Sabaidy["Info"] = "Polední menu podáváme každý všední den od 11 do 14 hodin. Polévka v ceně menu."
@@ -283,7 +288,6 @@ def PostMenu(menu_dict, url):
     Send given menu to given Glip URL
     '''
 
-
     body = menu_dict["url"] + "\n"
     body += menu_dict["Info"] + "\n"
 
@@ -317,6 +321,7 @@ def PostRestaurantsLinks(url):
     '''
     Send restaurants names and lunch menu links to given Glip URL.
     '''
+
     links = {
         '**BlackPointCafe**' : 'http://www.blackpointcafe.cz/denni-menu/',
         '**King´s Head**' : 'http://kingshead.cz/denni-menu/',
@@ -349,6 +354,7 @@ def PostFortuneCookie(url):
     '''
     Send randomly chosen fortune cookie to given Glip URL.
     '''
+
     cookie_archive = [
         'Your smile will tell you what makes you feel good.',
         'Don’t panic',
