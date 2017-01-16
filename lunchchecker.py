@@ -92,15 +92,15 @@ def GetMenuBuddha():
                                                  .replace("&amp;", " a "))
 
     if(day == 0):
-        menu_extracted_day =  findall("PONDĚLÍ(.*?)ÚTERÝ",menu_extracted,DOTALL) #onlz monday text
+        menu_extracted_day =  findall("PONDĚLÍ(.*?)ÚTERÝ",menu_extracted,DOTALL)
     elif(day == 1):
-        menu_extracted_day =  findall("ÚTERÝ(.*?)STŘEDA",menu_extracted,DOTALL) #onlz monday text
+        menu_extracted_day =  findall("ÚTERÝ(.*?)STŘEDA",menu_extracted,DOTALL)
     elif(day == 2):
-         menu_extracted_day =  findall("STŘEDA(.*?)ČTVRTEK",menu_extracted,DOTALL) #onlz monday text
+         menu_extracted_day =  findall("STŘEDA(.*?)ČTVRTEK",menu_extracted,DOTALL)
     elif(day == 3):
-        menu_extracted_day = findall("ČTVRTEK(.*?)PÁTEK",menu_extracted,DOTALL) #onlz monday text
+        menu_extracted_day = findall("ČTVRTEK(.*?)PÁTEK",menu_extracted,DOTALL)
     elif(day == 4):
-        menu_extracted_day = findall("PÁTEK(.*?)ALERGENY",menu_extracted,DOTALL) #onlz monday text
+        menu_extracted_day = findall("PÁTEK(.*?)ALERGENY",menu_extracted,DOTALL)
 
     buddha["Polévka"] = findall("Polévka:(.*?)22,- Kč",menu_extracted_day[0],DOTALL)[0]
     buddha["Menu 1"] = dict()
@@ -141,15 +141,15 @@ def GetMenuOsmicka():
     menu_extracted = sub(r'[\t\n\r]','',str(menu))
 
     if(day == 0):
-        menu_extracted_day =  findall("Pondělí(.*?)Úterý",menu_extracted,DOTALL) #onlz monday text
+        menu_extracted_day =  findall("Pondělí(.*?)Úterý",menu_extracted,DOTALL)
     elif(day == 1):
-        menu_extracted_day =  findall("Úterý(.*?)Středa",menu_extracted,DOTALL) #onlz monday text
+        menu_extracted_day =  findall("Úterý(.*?)Středa",menu_extracted,DOTALL)
     elif(day == 2):
-         menu_extracted_day =  findall("Středa(.*?)Čtvrtek",menu_extracted,DOTALL) #onlz monday text
+         menu_extracted_day =  findall("Středa(.*?)Čtvrtek",menu_extracted,DOTALL)
     elif(day == 3):
-        menu_extracted_day = findall("Čtvrtek(.*?)Pátek",menu_extracted,DOTALL) #onlz monday text
+        menu_extracted_day = findall("Čtvrtek(.*?)Pátek",menu_extracted,DOTALL)
     elif(day == 4):
-        menu_extracted_day = findall("Pátek(.*?)Sobota",menu_extracted,DOTALL) #onlz monday text
+        menu_extracted_day = findall("Pátek(.*?)Sobota",menu_extracted,DOTALL)
 
     osmicka["Polévka"] = findall("Polévka:(.*?)<",menu_extracted_day[0],DOTALL)[0]
     osmicka["Veg polévka"] = findall("Vegetariánské menu:(.*?)<",menu_extracted_day[0],DOTALL)[0]
@@ -196,15 +196,15 @@ def GetMenuGoldenNepal():
     menu_extracted = sub(r'[\t\n\r]','',str(menu))
 
     if(day == 0):
-        menu_extracted_day =  findall("Pondělí(.*?)Úterý",menu_extracted,DOTALL) #onlz monday text
+        menu_extracted_day =  findall("Pondělí(.*?)Úterý",menu_extracted,DOTALL)
     elif(day == 1):
-        menu_extracted_day =  findall("Úterý(.*?)Středa",menu_extracted,DOTALL) #onlz monday text
+        menu_extracted_day =  findall("Úterý(.*?)Středa",menu_extracted,DOTALL)
     elif(day == 2):
-         menu_extracted_day =  findall("Středa(.*?)Čtvrtek",menu_extracted,DOTALL) #onlz monday text
+         menu_extracted_day =  findall("Středa(.*?)Čtvrtek",menu_extracted,DOTALL)
     elif(day == 3):
-        menu_extracted_day = findall("Čtvrtek(.*?)Pátek",menu_extracted,DOTALL) #onlz monday text
+        menu_extracted_day = findall("Čtvrtek(.*?)Pátek",menu_extracted,DOTALL)
     elif(day == 4):
-        menu_extracted_day = findall("Pátek(.*?)Sobota",menu_extracted,DOTALL) #onlz monday text
+        menu_extracted_day = findall("Pátek(.*?)Sobota",menu_extracted,DOTALL)
 
     menu_courses = findall(r"content\">(.*?)</",menu_extracted_day[0],DOTALL)
     menu_prices = findall(r"price\">(.*?)</",menu_extracted_day[0],DOTALL)
@@ -249,15 +249,15 @@ def GetMenuSabaidy():
     menu_extracted = sub(r'[\t\n\r]','',str(soup))
 
     if(day == 0):
-        menu_extracted_day =  findall("Pondělí(.*?)Úterý",menu_extracted,DOTALL) #onlz monday text
+        menu_extracted_day =  findall("Pondělí(.*?)Úterý",menu_extracted,DOTALL)
     elif(day == 1):
-        menu_extracted_day =  findall("Úterý(.*?)Středa",menu_extracted,DOTALL) #onlz monday text
+        menu_extracted_day =  findall("Úterý(.*?)Středa",menu_extracted,DOTALL)
     elif(day == 2):
-         menu_extracted_day =  findall("Středa(.*?)Čtvrtek",menu_extracted,DOTALL) #onlz monday text
+         menu_extracted_day =  findall("Středa(.*?)Čtvrtek",menu_extracted,DOTALL)
     elif(day == 3):
-        menu_extracted_day = findall("Čtvrtek(.*?)Pátek",menu_extracted,DOTALL) #onlz monday text
+        menu_extracted_day = findall("Čtvrtek(.*?)Pátek",menu_extracted,DOTALL)
     elif(day == 4):
-        menu_extracted_day = findall("Pátek(.*?)ubytovani",menu_extracted,DOTALL) #onlz monday text
+        menu_extracted_day = findall("Pátek(.*?)ubytovani",menu_extracted,DOTALL)
 
     menu_courses = findall(r"<li>(.*?)\b[0-9]",menu_extracted_day[0],DOTALL)
     menu_prices = findall(r"\b([0-9]{2,3}?),-",menu_extracted_day[0],DOTALL)
@@ -281,6 +281,58 @@ def GetMenuSabaidy():
     Sabaidy["Menu 4"]["cena"] = menu_prices[3]
 
     return Sabaidy
+
+
+def GetMenuBlackPoint():
+    '''
+    Gets BlackPoint lunch menu.
+    '''
+
+    BlackPoint = {"url":"http://www.blackpointcafe.cz/denni-menu/"}
+    BlackPoint["Name"] = "Kavárno restaurace"
+    BlackPoint["Info"] = "Polévka v ceně menu"
+    BlackPoint["Icon"] = "http://files.blackpointcafe.cz/200000002-cb2aecc21b/200/black_cafe_1_black.png"
+    BlackPoint["CardPay"] = "Ano"
+
+    r = get("http://www.blackpointcafe.cz/denni-menu/")
+    r.encoding = 'utf-8'
+
+    soup = BeautifulSoup(r.text, "html5lib") #gets html code
+    menu_extracted = sub(r'[\t\n\r]','',str(soup)).replace('\xa0 \xa0', '')
+
+    if(day == 0):
+        menu_extracted_day =  findall("PONDĚLÍ(.*?)ÚTERÝ",menu_extracted,DOTALL)
+    elif(day == 1):
+        menu_extracted_day =  findall("ÚTERÝ(.*?)STŘEDA",menu_extracted,DOTALL)
+    elif(day == 2):
+         menu_extracted_day =  findall("STŘEDA(.*?)ČTVRTEK",menu_extracted,DOTALL)
+    elif(day == 3):
+        menu_extracted_day = findall("ČTVRTEK(.*?)PÁTEK",menu_extracted,DOTALL)
+    elif(day == 4):
+        menu_extracted_day = findall("PÁTEK(.*?)class",menu_extracted,DOTALL)
+
+    menu_courses = findall(r"li>([A-Z].*?)</",menu_extracted_day[0],DOTALL)
+    menu_prices = findall(r".{1}([0-9]{2,3}).{0,1}Kč",menu_extracted,DOTALL)
+
+    BlackPoint["Polévka"] = findall(r"pol: (.*?) \(",menu_extracted_day[0],DOTALL)[0]
+
+    BlackPoint["Menu 1"] = dict()
+    BlackPoint["Menu 1"]["menu"] = menu_courses[0]
+    BlackPoint["Menu 1"]["cena"] = menu_prices[0]
+
+    BlackPoint["Menu 2"] = dict()
+    BlackPoint["Menu 2"]["menu"] = menu_courses[1]
+    BlackPoint["Menu 2"]["cena"] = menu_prices[1]
+
+    BlackPoint["Menu 3"] = dict()
+    BlackPoint["Menu 3"]["menu"] = menu_courses[2]
+    BlackPoint["Menu 3"]["cena"] = menu_prices[2]
+
+    BlackPoint["Menu 4"] = dict()
+    BlackPoint["Menu 4"]["menu"] = menu_courses[3]
+    BlackPoint["Menu 4"]["cena"] = menu_prices[3]
+
+    return BlackPoint
 
 
 def PostMenu(menu_dict, url):
@@ -323,7 +375,6 @@ def PostRestaurantsLinks(url):
     '''
 
     links = {
-        '**BlackPointCafe**' : 'http://www.blackpointcafe.cz/denni-menu/',
         '**King´s Head**' : 'http://kingshead.cz/denni-menu/',
         '**Zelená Kočka - Solniční**' : 'http://www.zelenakocka.cz/index2.php',
         '**Tulip**' : 'http://tulip-restaurant.cz/cs/menu/',
@@ -393,6 +444,7 @@ def PostFortuneCookie(url):
     response = post(url, data=dumps(payload), headers=headers)
 
 PostMenu(GetMenuVarna(),url)
+PostMenu(GetMenuBlackPoint(),url)
 PostMenu(GetMenuBuddha(),url)
 PostMenu(GetMenuGoldenNepal(),url)
 PostMenu(GetMenuSabaidy(),url)
