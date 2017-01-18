@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 from random import choice
 
 url = 'https://hooks.glip.com/webhook/0a6f78d2-cf25-49d5-aeae-25a10fbb6262' #Test conv
-#   url = 'https://hooks.glip.com/webhook/feb6da0f-1cbe-4719-b0af-a1f0e871f885' #CASUAL: Oběd
+#url = 'https://hooks.glip.com/webhook/feb6da0f-1cbe-4719-b0af-a1f0e871f885' #CASUAL: Oběd
 
 day = datetime.today().weekday()
 time = datetime.now().time()
@@ -311,9 +311,7 @@ def GetMenuBlackPoint():
     elif(day == 4):
         menu_extracted_day = findall("PÁTEK(.*?)class",menu_extracted,DOTALL)
 
-
     menu_courses = findall(r"li>([A-Z,Č,Ď,Ř,Š,Ť,Ž].*?)</",menu_extracted_day[0],DOTALL)
-    print(menu_courses)
     menu_prices = findall(r".{1}([0-9]{2,3}).{0,1}Kč",menu_extracted,DOTALL)
 
     BlackPoint["Polévka"] = findall(r"pol: (.*?) \(",menu_extracted_day[0],DOTALL)[0]
