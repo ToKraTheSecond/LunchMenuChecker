@@ -77,7 +77,7 @@ def GetMenuBuddha():
     buddha = {"url":"http://www.indian-restaurant-buddha.cz/index.html"}
     buddha["Name"] = "Buddha: Indická a Nepálská Restaurace"
     buddha["Info"] = "Příloha ke každému jídlu (v ceně): Tandoori Nan (indický chléb) / indická rýže Basmati / kombinace obou příloh. Polévka se podává zvlášť/soup is served separately from menu. (22 Kč)"
-    buddha["Icon"] = "https://www.jidloted.cz/images/logos/11721.png"
+    buddha["Icon"] = "http://www.brnorozvoz.cz/restaurace-brno-v/indicka-a-nepalska-restaurace-buddha-brno.png"
     buddha["CardPay"] = "Ano"
 
     r = get(buddha["url"])
