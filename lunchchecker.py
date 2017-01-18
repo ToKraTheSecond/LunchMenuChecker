@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 from random import choice
 
 url = 'https://hooks.glip.com/webhook/0a6f78d2-cf25-49d5-aeae-25a10fbb6262' #Test conv
-#url = 'https://hooks.glip.com/webhook/feb6da0f-1cbe-4719-b0af-a1f0e871f885' #CASUAL: Oběd
+#   url = 'https://hooks.glip.com/webhook/feb6da0f-1cbe-4719-b0af-a1f0e871f885' #CASUAL: Oběd
 
 day = datetime.today().weekday()
 time = datetime.now().time()
@@ -37,7 +37,7 @@ def GetMenuVarna():
     varna["Menu 4"] = dict()
 
     varna["url"] = "http://www.restauracevarna.cz/denni-menu/"
-    varna["Name"] = "Varna Pivní Restaurace"
+    varna["Name"] = "Varna: Pivní Restaurace"
     varna["Info"] = "Polévka a bonaqua 0,25l v ceně, Menu 4 je bonusové menu"
     varna["Icon"] = "http://www.restauracevarna.cz/images/layout/logo.png"
     varna["CardPay"] = "Ano"
@@ -75,7 +75,7 @@ def GetMenuBuddha():
     '''
 
     buddha = {"url":"http://www.indian-restaurant-buddha.cz/index.html"}
-    buddha["Name"] = "Buddha Indická a Nepálská Restaurace"
+    buddha["Name"] = "Buddha: Indická a Nepálská Restaurace"
     buddha["Info"] = "Příloha ke každému jídlu (v ceně): Tandoori Nan (indický chléb) / indická rýže Basmati / kombinace obou příloh. Polévka se podává zvlášť/soup is served separately from menu. (22 Kč)"
     buddha["Icon"] = "https://www.jidloted.cz/images/logos/11721.png"
     buddha["CardPay"] = "Ano"
@@ -128,7 +128,7 @@ def GetMenuOsmicka():
     '''
 
     osmicka = {"url":"http://www.naosmicce.cz/Menu.pdf"}
-    osmicka["Name"] = "Bistro na Osmičce - Burger and Pasta"
+    osmicka["Name"] = "Bistro na Osmičce: Burger and Pasta"
     osmicka["Info"] = "Polévka dle denní nabídky je během doby poledního menu zahrnuta v ceně!"
     osmicka["Icon"] = "http://www.naosmicce.cz/img/logo.png"
     osmicka["CardPay"] = "Ne"
@@ -183,7 +183,7 @@ def GetMenuGoldenNepal():
     '''
 
     GoldenNepal = {"url":"http://goldennepal.cz/"}
-    GoldenNepal["Name"] = "Nepálská restaurace a bar"
+    GoldenNepal["Name"] = "Golden Nepal: Nepálská restaurace a bar"
     GoldenNepal["Info"] = "Ke každému jídlu ve všední den příloha rýže/placka/kombinace ZDARMA. Všechna jídla kromě Vindaloo, Jalfrezi, Madrasu a Falu obsahují smetanu. Všechny polévky obsahují mouku. Korma obsahuje ořechy. Chicken Tikka Masala, Butter Chicken a Vindaloo obsahují barvivo."
     GoldenNepal["Icon"] = "http://goldennepal.cz/wp-content/uploads/2016/06/logotext.png"
     GoldenNepal["CardPay"] = "Ano"
@@ -289,7 +289,7 @@ def GetMenuBlackPoint():
     '''
 
     BlackPoint = {"url":"http://www.blackpointcafe.cz/denni-menu/"}
-    BlackPoint["Name"] = "Kavárno restaurace"
+    BlackPoint["Name"] = "BlackPoint: Kavárno restaurace"
     BlackPoint["Info"] = "Polévka v ceně menu"
     BlackPoint["Icon"] = "http://files.blackpointcafe.cz/200000002-cb2aecc21b/200/black_cafe_1_black.png"
     BlackPoint["CardPay"] = "Ano"
@@ -311,7 +311,9 @@ def GetMenuBlackPoint():
     elif(day == 4):
         menu_extracted_day = findall("PÁTEK(.*?)class",menu_extracted,DOTALL)
 
-    menu_courses = findall(r"li>([A-Z].*?)</",menu_extracted_day[0],DOTALL)
+
+    menu_courses = findall(r"li>([A-Z,Č,Ď,Ř,Š,Ť,Ž].*?)</",menu_extracted_day[0],DOTALL)
+    print(menu_courses)
     menu_prices = findall(r".{1}([0-9]{2,3}).{0,1}Kč",menu_extracted,DOTALL)
 
     BlackPoint["Polévka"] = findall(r"pol: (.*?) \(",menu_extracted_day[0],DOTALL)[0]
