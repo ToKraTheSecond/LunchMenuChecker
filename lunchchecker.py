@@ -259,7 +259,7 @@ def GetMenuSabaidy():
     elif(day == 4):
         menu_extracted_day = findall("Pátek(.*?)ubytovani",menu_extracted,DOTALL)
 
-    menu_courses = findall(r"<li>(.*?)\b[0-9]",menu_extracted_day[0],DOTALL)
+    menu_courses = findall(r"\">([^<>].*?)\b[0-9]",menu_extracted_day[0],DOTALL)
     menu_prices = findall(r"\b([0-9]{2,3}?),-",menu_extracted_day[0],DOTALL)
 
     Sabaidy["Polévka"] = findall(r"m>(.*?)</",menu_extracted_day[0],DOTALL)[0]
