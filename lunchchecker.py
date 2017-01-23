@@ -206,7 +206,11 @@ def GetMenuGoldenNepal():
     elif(day == 4):
         menu_extracted_day = findall("Pátek(.*?)Sobota",menu_extracted,DOTALL)
 
-    menu_courses = findall(r"content\">(.*?)</",menu_extracted_day[0],DOTALL)
+    menu_courses_czech = findall(r"content\">(.*?)</",menu_extracted_day[0],DOTALL)
+    menu_courses_orig = findall(r"_title\">(.*?)</",menu_extracted_day[0],DOTALL)
+    menu_courses = menu_courses_orig
+    for i in range(len(menu_courses_orig)):
+        menu_courses[i] = menu_courses_orig[i] + " - " + menu_courses_czech[i]
     menu_prices = findall(r"price\">(.*?)</",menu_extracted_day[0],DOTALL)
 
     GoldenNepal["Polévka"] = menu_courses[0] + " " + menu_prices[0]
@@ -259,7 +263,7 @@ def GetMenuSabaidy():
     elif(day == 4):
         menu_extracted_day = findall("Pátek(.*?)ubytovani",menu_extracted,DOTALL)
 
-    menu_courses = findall(r"\">([^<>].*?)\b[0-9]",menu_extracted_day[0],DOTALL)
+    menu_courses = findall(r"<li>([^<>].*?)\b[0-9]",menu_extracted_day[0],DOTALL)
     menu_prices = findall(r"\b([0-9]{2,3}?),-",menu_extracted_day[0],DOTALL)
 
     Sabaidy["Polévka"] = findall(r"m>(.*?)</",menu_extracted_day[0],DOTALL)[0]
@@ -298,7 +302,7 @@ def GetMenuBlackPoint():
     r.encoding = 'utf-8'
 
     soup = BeautifulSoup(r.text, "html5lib") #gets html code
-    menu_extracted = sub(r'[\t\n\r]','',str(soup)).replace('\xa0 \xa0', '')
+    menu_extracted = sub(r'[\t\n\r]','',str(soup)).replace('\xa0', '')
 
     if(day == 0):
         menu_extracted_day =  findall("PONDĚLÍ(.*?)ÚTERÝ",menu_extracted,DOTALL)
@@ -429,6 +433,7 @@ def PostFortuneCookie(url):
         'You will die alone and poorly dressed.',
         'If you can read this, you are literate. Congratulations!',
         'Your existence is pointless.'
+        'You wil be hungry again in one hour.'
     ]
 
     body =      "\nFortune Cookie of the Day\n" \
@@ -443,13 +448,13 @@ def PostFortuneCookie(url):
     headers = {'content-type': 'application/json'}
     response = post(url, data=dumps(payload), headers=headers)
 
-PostMenu(GetMenuVarna(),url)
-PostMenu(GetMenuBlackPoint(),url)
-PostMenu(GetMenuBuddha(),url)
+#PostMenu(GetMenuVarna(),url)
+#PostMenu(GetMenuBlackPoint(),url)
+#PostMenu(GetMenuBuddha(),url)
 PostMenu(GetMenuGoldenNepal(),url)
-PostMenu(GetMenuSabaidy(),url)
-PostMenu(GetMenuOsmicka(),url)
+#PostMenu(GetMenuSabaidy(),url)
+#PostMenu(GetMenuOsmicka(),url)
 
-PostRestaurantsLinks(url)
+#PostRestaurantsLinks(url)
 
-PostFortuneCookie(url)
+#PostFortuneCookie(url)
