@@ -388,6 +388,7 @@ def PostRestaurantsLinks(url):
         '**Stern**' : 'https://www.restu.cz/stern-1888-original-restaurant/denni-menu/',
         '**La Spernaza**' : 'http://lasperanza-bistro.cz/menu-complete/',
         '**Pivnice Pegas**' : 'http://brnorestauracepivnice.hotelpegas.cz/denni-menu/'
+        '**Cattani**' : 'http://www.cattani.cz/',
     }
 
     body = '**Ostatní restaurace:**\n'
@@ -449,12 +450,12 @@ def PostFortuneCookie(url):
     response = post(url, data=dumps(payload), headers=headers)
 
 #PostMenu(GetMenuVarna(),url)
-#PostMenu(GetMenuBlackPoint(),url)
-#PostMenu(GetMenuBuddha(),url)
+PostMenu(GetMenuBlackPoint(),url)
+PostMenu(GetMenuBuddha(),url)
 PostMenu(GetMenuGoldenNepal(),url)
-#PostMenu(GetMenuSabaidy(),url)
-#PostMenu(GetMenuOsmicka(),url)
+PostMenu(GetMenuSabaidy(),url)
+PostMenu(GetMenuOsmicka(),url)
 
-#PostRestaurantsLinks(url)
+PostRestaurantsLinks(url)
 
-#PostFortuneCookie(url)
+PostFortuneCookie(url)
