@@ -8,4 +8,4 @@ Get menu from:
 - Sabaidy
 - Osmicka
 
-Chinese fortune cookies are hardcoded.
+Chinese fortune cookies source: http://www.fortunecookiemessage.com
