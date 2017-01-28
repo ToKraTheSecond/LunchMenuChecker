@@ -395,13 +395,19 @@ def PostRestaurantsLinks(url):
     response = post(url, data=dumps(payload), headers=headers)
 
 
-PostMenu(GetMenuVarna(), url)
-PostMenu(GetMenuBlackPoint(), url)
-PostMenu(GetMenuBuddha(), url)
-PostMenu(GetMenuGoldenNepal(), url)
-PostMenu(GetMenuSabaidy(), url)
-PostMenu(GetMenuOsmicka(), url)
+post_list = [
+    # PostMenu(GetMenuVarna(), url),
+    "PostMenu(GetMenuBlackPoint(), url)",
+    "PostMenu(GetMenuBuddha(), url)",
+    "PostMenu(GetMenuGoldenNepal(), url)",
+    "PostMenu(GetMenuSabaidy(), url)",
+    "PostMenu(GetMenuOsmicka(), url)",
+    "PostRestaurantsLinks(url)",
+    "GetPostFortuneCookie(url)"
+]
 
-PostRestaurantsLinks(url)
-
-GetPostFortuneCookie(url)
+for current_post in post_list:
+    try:
+        exec(current_post)
+    except:
+        pass
