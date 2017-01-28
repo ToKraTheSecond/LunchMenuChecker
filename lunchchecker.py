@@ -1,3 +1,4 @@
+# - *- coding: utf- 8 - *-
 '''
 Post lunch menu from chosen restaurants to Glip chat.
 '''
@@ -9,8 +10,8 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 from random import choice
 
-url = 'https://hooks.glip.com/webhook/0a6f78d2-cf25-49d5-aeae-25a10fbb6262' #Test conv
-#url = 'https://hooks.glip.com/webhook/feb6da0f-1cbe-4719-b0af-a1f0e871f885' #CASUAL: Oběd
+url = 'https://hooks.glip.com/webhook/0a6f78d2-cf25-49d5-aeae-25a10fbb6262' # Test conv
+#url = 'https://hooks.glip.com/webhook/feb6da0f-1cbe-4719-b0af-a1f0e871f885' #CASUAL: Obed
 
 day = datetime.today().weekday()
 time = datetime.now().time()
@@ -315,8 +316,8 @@ def GetMenuBlackPoint():
     elif(day == 4):
         menu_extracted_day = findall("PÁTEK(.*?)class",menu_extracted,DOTALL)
 
-    menu_courses = findall(r"li>([A-Z,Č,Ď,Ř,Š,Ť,Ž].*?)</",menu_extracted_day[0],DOTALL)
-    menu_prices = findall(r".{1}([0-9]{2,3}).{0,1}Kč",menu_extracted,DOTALL)
+    menu_courses = findall(r"li>([A-Z,Č,Ď,Ř,Š,Ť,Ž].*?)</", menu_extracted_day[0], DOTALL)
+    menu_prices = findall(r".{1}([0-9]{2,3}).{0,1}Kč", menu_extracted, DOTALL)
 
     BlackPoint["Polévka"] = findall(r"pol: (.*?) \(",menu_extracted_day[0],DOTALL)[0]
 
@@ -337,6 +338,27 @@ def GetMenuBlackPoint():
     BlackPoint["Menu 4"]["cena"] = menu_prices[3]
 
     return BlackPoint
+
+
+def GetPostFortuneCookie(url):
+    """
+    Get and post fortune cookie
+    """
+
+    r = get("http://www.fortunecookiemessage.com")
+    r.encoding = 'utf-8'
+
+    soup = BeautifulSoup(r.text, "html5lib")  # gets html code
+    cookie = sub(r'[\t\n\r]', '', str(soup))
+    cookie_extracted = findall(r"\.\">(.*?)</a>", cookie, DOTALL)[0]
+    print(cookie_extracted)
+
+    body = "\nFortune Cookie of the Day\n" \
+        + "\n**" + cookie_extracted + "**\n\n"
+
+    payload = {'body': body}
+    headers = {'content-type': 'application/json'}
+    response = post(url, data=dumps(payload), headers=headers)
 
 
 def PostMenu(menu_dict, url):
@@ -374,21 +396,21 @@ def PostMenu(menu_dict, url):
 
 
 def PostRestaurantsLinks(url):
-    '''
+    """
     Send restaurants names and lunch menu links to given Glip URL.
-    '''
+    """
 
     links = {
-        '**King´s Head**' : 'http://kingshead.cz/denni-menu/',
-        '**Zelená Kočka - Solniční**' : 'http://www.zelenakocka.cz/index2.php',
-        '**Tulip**' : 'http://tulip-restaurant.cz/cs/menu/',
-        '**Annapurna**' : 'http://indicka-restaurace-annapurna.cz/index.php?option=com_content&view=article&id=2&Itemid=118',
-        '**Everest**' : 'http://www.restauraceeverest.cz/poledni-menu.html',
-        '**Satyam**' : 'http://www.satyam.cz/cs/denni-menu.aspx',
-        '**Stern**' : 'https://www.restu.cz/stern-1888-original-restaurant/denni-menu/',
-        '**La Spernaza**' : 'http://lasperanza-bistro.cz/menu-complete/',
-        '**Pivnice Pegas**' : 'http://brnorestauracepivnice.hotelpegas.cz/denni-menu/'
-        '**Cattani**' : 'http://www.cattani.cz/',
+        '**King´s Head**': 'http://kingshead.cz/denni-menu/',
+        '**Zelená Kočka - Solniční**': 'http://www.zelenakocka.cz/index2.php',
+        '**Tulip**': 'http://tulip-restaurant.cz/cs/menu/',
+        '**Annapurna**': 'http://indicka-restaurace-annapurna.cz/index.php?option=com_content&view=article&id=2&Itemid=118',
+        '**Everest**': 'http://www.restauraceeverest.cz/poledni-menu.html',
+        '**Satyam**': 'http://www.satyam.cz/cs/denni-menu.aspx',
+        '**Stern**': 'https://www.restu.cz/stern-1888-original-restaurant/denni-menu/',
+        '**La Spernaza**': 'http://lasperanza-bistro.cz/menu-complete/',
+        '**Pivnice Pegas**': 'http://brnorestauracepivnice.hotelpegas.cz/denni-menu/',
+        '**Cattani**': 'http://www.cattani.cz/',
     }
 
     body = '**Ostatní restaurace:**\n'
@@ -399,63 +421,20 @@ def PostRestaurantsLinks(url):
 
     payload = \
     {
-	'body':body
-    }
-
-    headers = {'content-type': 'application/json'}
-    response = post(url, data=dumps(payload), headers=headers)
-
-
-def PostFortuneCookie(url):
-    '''
-    Send randomly chosen fortune cookie to given Glip URL.
-    '''
-
-    cookie_archive = [
-        'Your smile will tell you what makes you feel good.',
-        'Don’t panic',
-        'It could be better, but it’s good enough.',
-        'Two days from now, tomorrow will be yesterday.',
-        'Stop eating now. Food poisoning no fun.',
-        'Person who eat fortune cookie get lousy dessert.',
-        'Soup was secret family recipe made from toad. Hope you liked!',
-        'You will soon have an out of money experience.',
-        'Two can live as cheaply as one, for half as long.',
-        'Give person fish, he eat for day. Teach person to fish, he always smell funny.',
-        'Ignore last cookie!',
-        'The end is near, might as well have dessert.',
-        'This fortune no good. Try another.',
-        'Run!',
-        'Make love, not bugs!',
-        'I cannot help you, for I’m just a cookie.',
-        'The fortune you seek, is in another cookie.',
-        'Don’t eat any Chinese food today or you’ll be sick!',
-        'Come back later….I’m sleeping (yes, cookies need their sleep too).',
-        'You will die alone and poorly dressed.',
-        'If you can read this, you are literate. Congratulations!',
-        'Your existence is pointless.'
-        'You wil be hungry again in one hour.'
-    ]
-
-    body =      "\nFortune Cookie of the Day\n" \
-                                +               \
-            "\n**" + choice(cookie_archive) + "**\n\n"
-
-    payload = \
-    {
 	   'body' : body
     }
 
     headers = {'content-type': 'application/json'}
     response = post(url, data=dumps(payload), headers=headers)
 
-#PostMenu(GetMenuVarna(),url)
-PostMenu(GetMenuBlackPoint(),url)
-PostMenu(GetMenuBuddha(),url)
-PostMenu(GetMenuGoldenNepal(),url)
-PostMenu(GetMenuSabaidy(),url)
-PostMenu(GetMenuOsmicka(),url)
+
+PostMenu(GetMenuVarna(), url)
+PostMenu(GetMenuBlackPoint(), url)
+PostMenu(GetMenuBuddha(), url)
+PostMenu(GetMenuGoldenNepal(), url)
+PostMenu(GetMenuSabaidy(), url)
+PostMenu(GetMenuOsmicka(), url)
 
 PostRestaurantsLinks(url)
 
-PostFortuneCookie(url)
+GetPostFortuneCookie(url)
