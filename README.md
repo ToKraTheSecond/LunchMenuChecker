@@ -1,5 +1,7 @@
 # LunchMenuChecker
 
+
+
 Get menu from:
 - Varna
 - BlackPoint
@@ -7,5 +9,7 @@ Get menu from:
 - GoldenNepal
 - Sabaidy
 - Osmicka
+
+and post it to Glip conversation via Glip WebHooks.
 
 Chinese fortune cookies source: http://www.fortunecookiemessage.com
