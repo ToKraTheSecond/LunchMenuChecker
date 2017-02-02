@@ -8,9 +8,9 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 
 # Test conv
-url = 'https://hooks.glip.com/webhook/0a6f78d2-cf25-49d5-aeae-25a10fbb6262'
+# url = 'https://hooks.glip.com/webhook/0a6f78d2-cf25-49d5-aeae-25a10fbb6262'
 # CASUAL Obed conv
-# url = 'https://hooks.glip.com/webhook/feb6da0f-1cbe-4719-b0af-a1f0e871f885'
+url = 'https://hooks.glip.com/webhook/feb6da0f-1cbe-4719-b0af-a1f0e871f885'
 
 day = datetime.today().weekday()
 time = datetime.now().time()
@@ -327,8 +327,7 @@ def GetPostFortuneCookie(url):
     soup = BeautifulSoup(r.text, "html5lib")  # gets html code
     cookie = sub(r'[\t\n\r]', '', str(soup))
     cookie_extracted = findall(r"\.\">(.*?)</a>", cookie, DOTALL)[0]
-    print(cookie_extracted)
-
+    
     body = "\nFortune Cookie of the Day\n" \
         + "\n**" + cookie_extracted + "**\n\n"
 
@@ -396,7 +395,7 @@ def PostRestaurantsLinks(url):
 
 
 post_list = [
-    # PostMenu(GetMenuVarna(), url),
+    # "PostMenu(GetMenuVarna(), url), Nobody eats there LOL
     "PostMenu(GetMenuBlackPoint(), url)",
     "PostMenu(GetMenuBuddha(), url)",
     "PostMenu(GetMenuGoldenNepal(), url)",
