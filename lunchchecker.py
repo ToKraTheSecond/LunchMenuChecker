@@ -7,11 +7,16 @@ from json import dumps
 from datetime import datetime
 from bs4 import BeautifulSoup
 
-# Test conv
-# url = 'https://hooks.glip.com/webhook/0a6f78d2-cf25-49d5-aeae-25a10fbb6262'
-# CASUAL Obed conv
-url = 'https://hooks.glip.com/webhook/feb6da0f-1cbe-4719-b0af-a1f0e871f885'
 
+# Import of Glip conversation links from external file
+with open('gliplinks.txt') as f:
+    url_list = f.readlines()
+
+url_test = url_list[2][:-1]
+url_conv = url_list[4]
+url = url_test # SET URL !!!
+
+# Setting current datetime
 day = datetime.today().weekday()
 time = datetime.now().time()
 
