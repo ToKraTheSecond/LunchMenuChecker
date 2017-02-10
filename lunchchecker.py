@@ -8,27 +8,6 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 
 
-# Import of Glip conversation links from external file
-with open('gliplinks.txt') as f:
-    url_list = f.readlines()
-
-url_test = url_list[2][:-1]
-url_conv = url_list[4]
-url = url_conv # SET URL !!!
-
-# Setting current datetime
-day = datetime.today().weekday()
-time = datetime.now().time()
-
-# We are looking for next day menu after 14:30.
-if time.hour > 15:
-    day += 1
-
-# We will look for monday if it is saturday or sunday.
-if day == 5 or day == 6:
-    day = 0
-
-
 def GetMenuVarna():
     """Get Varna lunch menu."""
     days_of_week = ['pondělí', 'úterý', 'středa', 'čtvrtek', 'pátek']
@@ -398,20 +377,42 @@ def PostRestaurantsLinks(url):
     headers = {'content-type': 'application/json'}
     response = post(url, data=dumps(payload), headers=headers)
 
+if __name__ == "__main__":
+    # Import of Glip conversation links from external file
+    with open('gliplinks.txt') as f:
+        url_list = f.readlines()
 
-post_list = [
-    # "PostMenu(GetMenuVarna(), url), Nobody eats there LOL
-    "PostMenu(GetMenuBlackPoint(), url)",
-    "PostMenu(GetMenuBuddha(), url)",
-    "PostMenu(GetMenuGoldenNepal(), url)",
-    "PostMenu(GetMenuSabaidy(), url)",
-    "PostMenu(GetMenuOsmicka(), url)",
-    "PostRestaurantsLinks(url)",
-    "GetPostFortuneCookie(url)"
-]
+    url_test = url_list[2][:-1]
+    url_conv = url_list[4]
+    url = url_conv # SET URL !!!
 
-for current_post in post_list:
-    try:
-        exec(current_post)
-    except:
-        pass
+    # Setting current datetime
+    day = datetime.today().weekday()
+    time = datetime.now().time()
+
+    # We are looking for next day menu after 14:30.
+    if time.hour > 15:
+        day += 1
+
+    # We will look for monday if it is saturday or sunday.
+    if day == 5 or day == 6:
+        day = 0
+
+
+    func_list = [
+        GetMenuBlackPoint,
+        GetMenuBuddha,
+        GetMenuGoldenNepal,
+        GetMenuSabaidy,
+        GetMenuOsmicka
+    ]
+
+    for func in func_list:
+        try:
+            PostMenu(func(), url)
+        except:
+            print("{} failed.".format(func.__name__) )
+
+    PostRestaurantsLinks(url)
+    GetPostFortuneCookie(url)
+
