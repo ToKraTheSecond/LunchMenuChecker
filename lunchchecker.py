@@ -14,7 +14,7 @@ with open('gliplinks.txt') as f:
 
 url_test = url_list[2][:-1]
 url_conv = url_list[4]
-url = url_test # SET URL !!!
+url = url_conv # SET URL !!!
 
 # Setting current datetime
 day = datetime.today().weekday()
@@ -79,7 +79,7 @@ def GetMenuBuddha():
     buddha["Info"] = "Příloha ke každému jídlu (v ceně): Tandoori Nan (indický chléb) / indická rýže Basmati / kombinace obou příloh. Polévka se podává zvlášť/soup is served separately from menu. (22 Kč)"
     buddha["Icon"] = "http://www.brnorozvoz.cz/restaurace-brno-v/indicka-a-nepalska-restaurace-buddha-brno.png"
     buddha["CardPay"] = "Ano"
-
+    
     r = get(buddha["url"])
     r.encoding = 'utf-8'
 
@@ -167,7 +167,7 @@ def GetMenuOsmicka():
     osmicka["Menu 1"]["cena"] = findall(r"\"cena\">(.*?)<", menu_extracted_day[0], DOTALL)[0]
     osmicka["Menu 2"]["cena"] = findall(r"\"cena\">(.*?)<", menu_extracted_day[0], DOTALL)[1]
     osmicka["Menu 3"]["cena"] = findall(r"\"cena\">(.*?)<", menu_extracted_day[0], DOTALL)[2]
-
+   
     return osmicka
 
 
@@ -221,7 +221,7 @@ def GetMenuGoldenNepal():
     GoldenNepal["Menu 4"] = dict()
     GoldenNepal["Menu 4"]["menu"] = menu_courses[4]
     GoldenNepal["Menu 4"]["cena"] = menu_prices[4]
-
+    
     return GoldenNepal
 
 
