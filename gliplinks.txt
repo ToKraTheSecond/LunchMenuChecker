@@ -1,4 +1,4 @@
-Functionality of code is dependent on links order!
+Functionality of code is dependent on links order! No empty line after second link is allowed!!!
 Test
 ______put conversation link here_________
 CASUAL Obed conv - selected as default
