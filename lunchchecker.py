@@ -308,9 +308,9 @@ def GetPostFortuneCookie(url):
     r = get("http://www.fortunecookiemessage.com")
     r.encoding = 'utf-8'
 
-    soup = BeautifulSoup(r.text, "html5lib")  # gets html code
-    cookie = sub(r'[\t\n\r]', '', str(soup))
-    cookie_extracted = findall(r"\.\">(.*?)</a>", cookie, DOTALL)[0]
+    soup = BeautifulSoup(r.text, "html5lib").text
+    cookie = sub(r'[\t\n\r]', '', str(soup))    
+    cookie_extracted = findall(r"([A-Za-z][0-9a-zA-Z\b-';:,.()?]{15,100}[.!?\b])", cookie, DOTALL)[1]
     
     body = "\nFortune Cookie of the Day\n" \
         + "\n**" + cookie_extracted + "**\n\n"
