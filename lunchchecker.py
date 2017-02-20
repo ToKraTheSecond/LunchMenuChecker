@@ -1,4 +1,4 @@
-# - *- coding: utf- 8 - *-
+﻿# - *- coding: utf- 8 - *-
 """Post lunch menu from chosen restaurants to Glip chat."""
 
 from re import search, findall, DOTALL, sub
@@ -364,6 +364,7 @@ def PostRestaurantsLinks(url):
         '**La Spernaza**': 'http://lasperanza-bistro.cz/menu-complete/',
         '**Pivnice Pegas**': 'http://brnorestauracepivnice.hotelpegas.cz/denni-menu/',
         '**Cattani**': 'http://www.cattani.cz/',
+	'**Doubravnicka**': 'https://www.zomato.com/cs/brno/1-doubravnick%C3%A1-restaurace-%C4%8Dern%C3%A1-pole-brno-st%C5%99ed/denn%C3%AD-menu',
     }
 
     body = '**Ostatní restaurace:**\n'
