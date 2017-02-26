@@ -1,4 +1,4 @@
-﻿# - *- coding: utf- 8 - *-
+﻿# -*- coding: utf-8 -*-
 """Post lunch menu from chosen restaurants to Glip chat."""
 
 from re import search, findall, DOTALL, sub
@@ -6,6 +6,7 @@ from requests import get, post
 from json import dumps
 from datetime import datetime
 from bs4 import BeautifulSoup
+from sys import argv
 
 
 def GetMenuVarna():
@@ -385,7 +386,14 @@ if __name__ == "__main__":
 
     url_test = url_list[2][:-1]
     url_conv = url_list[4]
-    url = url_conv # SET URL !!!
+    
+    url = argv[1]
+    if url == 't':
+        url = url_test
+    elif url == 'o':
+        url = url_conv
+    else:
+        raise Exception('Wrong argument!')
 
     # Setting current datetime
     day = datetime.today().weekday()
