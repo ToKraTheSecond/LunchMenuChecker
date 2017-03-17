@@ -11,7 +11,16 @@ and post it to Glip conversation via Glip WebHooks.
 
 Chinese fortune cookies source: http://www.fortunecookiemessage.com
 
+# Install
+
 Add your Glip webhook links to gliplinks.txt
+
+Install dependencies by:
+```
+pip install -r requirements.txt
+```
+
+# How to use
 
 Type of conversation (test/team) and restaurant is selected by two input parameteres during script call.
 
