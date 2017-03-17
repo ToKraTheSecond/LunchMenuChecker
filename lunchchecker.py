@@ -408,7 +408,6 @@ if __name__ == "__main__":
         day = 0
 
     check = {'GetMenuSabaidy':GetMenuSabaidy, 'GetMenuOsmicka':GetMenuOsmicka, 'GetMenuBlackPoint':GetMenuBlackPoint, 'GetMenuBuddha':GetMenuBuddha, 'GetMenuGoldenNepal':GetMenuGoldenNepal}
-    
     if argv[2] in check:
         try:                  
             PostMenu(check[argv[2]](), url)            
@@ -420,7 +419,6 @@ if __name__ == "__main__":
     else:
         raise Exception('Wrong second argument!')
         exit()
-
     
     func_list = [
         GetMenuBlackPoint,
