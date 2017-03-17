@@ -35,9 +35,8 @@ Team:
 ```
 python lunchchecker.py o all
 ```
-Second argument is for restaurant selection.
+Second argument is for restaurant selection:
 
-Restaurant selection:
 ```
 python lunchchecker.py o all
 python lunchchecker.py o GetMenuRestaurantname
