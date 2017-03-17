@@ -408,13 +408,13 @@ if __name__ == "__main__":
         day = 0
 
     check = {'GetMenuSabaidy':GetMenuSabaidy, 'GetMenuOsmicka':GetMenuOsmicka, 'GetMenuBlackPoint':GetMenuBlackPoint, 'GetMenuBuddha':GetMenuBuddha, 'GetMenuGoldenNepal':GetMenuGoldenNepal}
-    if argv[2]:
-        if argv[2] in check:
-            try:                  
-                PostMenu(check[argv[2]](), url)            
-            except:
-                print("{} failed.".format(argv[2]))            
-            exit()
+    
+    if argv[2] in check:
+        try:                  
+            PostMenu(check[argv[2]](), url)            
+        except:
+            print("{} failed.".format(argv[2]))            
+        exit()
     elif argv[2] == 'all':
         pass
     else:
