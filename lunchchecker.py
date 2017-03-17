@@ -6,7 +6,7 @@ from requests import get, post
 from json import dumps
 from datetime import datetime
 from bs4 import BeautifulSoup
-from sys import argv
+from sys import argv, exit
 
 
 def GetMenuVarna():
@@ -393,8 +393,8 @@ if __name__ == "__main__":
     elif url == 'o':
         url = url_conv
     else:
-        raise Exception('Wrong argument!')
-
+        raise Exception('Wrong first argument!')
+    
     # Setting current datetime
     day = datetime.today().weekday()
     time = datetime.now().time()
@@ -407,7 +407,21 @@ if __name__ == "__main__":
     if day == 5 or day == 6:
         day = 0
 
+    check = {'GetMenuSabaidy':GetMenuSabaidy, 'GetMenuOsmicka':GetMenuOsmicka, 'GetMenuBlackPoint':GetMenuBlackPoint, 'GetMenuBuddha':GetMenuBuddha, 'GetMenuGoldenNepal':GetMenuGoldenNepal}
+    if argv[2]:
+        if argv[2] in check:
+            try:                  
+                PostMenu(check[argv[2]](), url)            
+            except:
+                print("{} failed.".format(argv[2]))            
+            exit()
+    elif argv[2] == 'all':
+        pass
+    else:
+        raise Exception('Wrong second argument!')
+        exit()
 
+    
     func_list = [
         GetMenuBlackPoint,
         GetMenuBuddha,
@@ -422,6 +436,6 @@ if __name__ == "__main__":
         except:
             print("{} failed.".format(func.__name__) )
 
-    PostRestaurantsLinks(url)
+    PostRestaurantsLinks(url)    
     GetPostFortuneCookie(url)
 
