@@ -1,4 +1,4 @@
-# Glip LunchMenuChecker for Python 3.5
+# Glip LunchMenuChecker for Python 3
 
 Get menu from:
 - BlackPoint
