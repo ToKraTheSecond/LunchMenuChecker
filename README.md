@@ -1,4 +1,4 @@
-# LunchMenuChecker for Python 3.5
+# Glip LunchMenuChecker for Python 3.5
 
 Get menu from:
 - BlackPoint
@@ -13,7 +13,9 @@ Chinese fortune cookies source: http://www.fortunecookiemessage.com
 
 Add your Glip webhook links to gliplinks.txt
 
-Type of conversation (test/team) and restaurant is selected by input parameteres during script call.
+Type of conversation (test/team) and restaurant is selected by two input parameteres during script call.
+
+First argument is for conversation selection.
 
 Test:
 ```
@@ -24,6 +26,7 @@ Team:
 ```
 python lunchchecker.py o all
 ```
+Second argument is for restaurant selection.
 
 Restaurant selection:
 ```
