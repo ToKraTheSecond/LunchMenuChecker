@@ -9,50 +9,6 @@ from bs4 import BeautifulSoup
 from sys import argv, exit
 import sys
 
-
-def GetMenuVarna():
-    """Get Varna lunch menu."""
-    days_of_week = ['pondělí', 'úterý', 'středa', 'čtvrtek', 'pátek']
-
-    varna = dict()
-    varna["Menu 1"] = dict()
-    varna["Menu 2"] = dict()
-    varna["Menu 3"] = dict()
-    varna["Menu 4"] = dict()
-
-    varna["url"] = "http://www.restauracevarna.cz/denni-menu/"
-    varna["Name"] = "Varna: Pivní Restaurace"
-    varna["Info"] = "Polévka a bonaqua 0,25l v ceně, Menu 4 je bonusové menu"
-    varna["Icon"] = "http://www.restauracevarna.cz/images/layout/logo.png"
-    varna["CardPay"] = "Ano"
-
-    r = get(varna["url"])
-    r.encoding = 'utf-8'
-    soup = BeautifulSoup(r.text, "html5lib")  # gets html code
-
-    for date in soup.findAll('h2'):
-        if days_of_week[day] in date.get_text():
-            varna["Polévka"] = date.findNext("td").get_text().strip()
-
-            varna["Menu 1"]["menu"] = date.findAllNext("td", {'class': 'nazev'})[0].get_text().strip()
-            varna["Menu 1"]["cena"] = date.findAllNext("td", {'class': 'cena'})[0].get_text().strip()
-            varna["Menu 2"]["menu"] = date.findAllNext("td", {'class': 'nazev'})[1].get_text().strip()
-            varna["Menu 2"]["cena"] = date.findAllNext("td", {'class': 'cena'})[1].get_text().strip()
-            varna["Menu 3"]["menu"] = date.findAllNext("td", {'class': 'nazev'})[2].get_text().strip()
-            varna["Menu 3"]["cena"] = date.findAllNext("td", {'class': 'cena'})[2].get_text().strip()
-            varna["Menu 4"]["menu"] = date.findAllNext("td", {'class': 'nazev'})[3].get_text().strip()
-            varna["Menu 4"]["cena"] = date.findAllNext("td", {'class': 'cena'})[3].get_text().strip()
-
-            # get numbers from Kč string
-            varna["Menu 1"]["cena"] = int(search(r'\d+', varna["Menu 1"]["cena"]).group())
-            varna["Menu 2"]["cena"] = int(search(r'\d+', varna["Menu 2"]["cena"]).group())
-            varna["Menu 3"]["cena"] = int(search(r'\d+', varna["Menu 3"]["cena"]).group())
-            varna["Menu 4"]["cena"] = int(search(r'\d+', varna["Menu 4"]["cena"]).group())
-            break  # so we cant find more days
-
-    return varna
-
-
 def GetMenuBuddha():
     """Get Buddha lunch menu."""
     buddha = {"url": "http://www.indian-restaurant-buddha.cz/index.html"}
@@ -60,7 +16,7 @@ def GetMenuBuddha():
     buddha["Info"] = "Příloha ke každému jídlu (v ceně): Tandoori Nan (indický chléb) / indická rýže Basmati / kombinace obou příloh. Polévka se podává zvlášť/soup is served separately from menu. (22 Kč)"
     buddha["Icon"] = "http://www.brnorozvoz.cz/restaurace-brno-v/indicka-a-nepalska-restaurace-buddha-brno.png"
     buddha["CardPay"] = "Ano"
-    
+
     r = get(buddha["url"])
     r.encoding = 'utf-8'
 
@@ -148,7 +104,7 @@ def GetMenuOsmicka():
     osmicka["Menu 1"]["cena"] = findall(r"\"cena\">(.*?)<", menu_extracted_day[0], DOTALL)[0]
     osmicka["Menu 2"]["cena"] = findall(r"\"cena\">(.*?)<", menu_extracted_day[0], DOTALL)[1]
     osmicka["Menu 3"]["cena"] = findall(r"\"cena\">(.*?)<", menu_extracted_day[0], DOTALL)[2]
-   
+
     return osmicka
 
 
@@ -202,7 +158,7 @@ def GetMenuGoldenNepal():
     GoldenNepal["Menu 4"] = dict()
     GoldenNepal["Menu 4"]["menu"] = menu_courses[4]
     GoldenNepal["Menu 4"]["cena"] = menu_prices[4]
-    
+
     return GoldenNepal
 
 
@@ -311,9 +267,9 @@ def GetPostFortuneCookie(url):
     r.encoding = 'utf-8'
 
     soup = BeautifulSoup(r.text, "html5lib").text
-    cookie = sub(r'[\t\n\r]', '', str(soup))    
+    cookie = sub(r'[\t\n\r]', '', str(soup))
     cookie_extracted = findall(r"([A-Za-z][0-9a-zA-Z\b-';:,.()?]{15,100}[.!?\b])", cookie, DOTALL)[1]
-    
+
     body = "\nFortune Cookie of the Day\n" \
         + "\n**" + cookie_extracted + "**\n\n"
 
@@ -366,7 +322,7 @@ def PostRestaurantsLinks(url):
         '**La Spernaza**': 'http://lasperanza-bistro.cz/menu-complete/',
         '**Pivnice Pegas**': 'http://brnorestauracepivnice.hotelpegas.cz/denni-menu/',
         '**Cattani**': 'http://www.cattani.cz/',
-	'**Doubravnicka**': 'https://www.zomato.com/cs/brno/1-doubravnick%C3%A1-restaurace-%C4%8Dern%C3%A1-pole-brno-st%C5%99ed/denn%C3%AD-menu',
+	    '**Doubravnicka**': 'https://www.zomato.com/cs/brno/1-doubravnick%C3%A1-restaurace-%C4%8Dern%C3%A1-pole-brno-st%C5%99ed/denn%C3%AD-menu',
     }
 
     body = '**Ostatní restaurace:**\n'
@@ -387,8 +343,9 @@ if __name__ == "__main__":
 
     url_test = url_list[2][:-1]
     url_conv = url_list[4]
-    
     url = argv[1]
+
+    #Checks first argument
     if url == 't':
         url = url_test
     elif url == 'o':
@@ -396,7 +353,7 @@ if __name__ == "__main__":
     else:
         raise Exception('Wrong first argument!')
         exit()
-    
+
     # Setting current datetime
     day = datetime.today().weekday()
     time = datetime.now().time()
@@ -407,20 +364,21 @@ if __name__ == "__main__":
 
     # We will look for monday if it is saturday or sunday.
     if day == 5 or day == 6:
-        day = 0       
-    
+        day = 0
+
+    #Checks second argument
     if argv[2] in {'GetMenuSabaidy', 'GetMenuOsmicka', 'GetMenuBlackPoint', 'GetMenuBuddha', 'GetMenuGoldenNepal'}:
-        try:                  
-            PostMenu(getattr(sys.modules[__name__], argv[2])(), url)                        
+        try:
+            PostMenu(getattr(sys.modules[__name__], argv[2])(), url)
         except:
-            print("{} failed!".format(argv[2]))            
+            print("{} failed!".format(argv[2]))
         exit()
     elif argv[2] == 'all':
         pass
     else:
         raise Exception('Wrong second argument!')
         exit()
-        
+
     func_list = [
         GetMenuBlackPoint,
         GetMenuBuddha,
@@ -435,6 +393,5 @@ if __name__ == "__main__":
         except:
             print("{} failed.".format(func.__name__) )
 
-    PostRestaurantsLinks(url)    
+    PostRestaurantsLinks(url)
     GetPostFortuneCookie(url)
-
