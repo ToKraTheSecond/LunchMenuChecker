@@ -7,7 +7,7 @@ Get menu from:
 - Sabaidy
 - Osmicka
 
-and post it to Glip conversation via Glip WebHooks.
+restaurants and post it to Glip conversation via Glip WebHooks.
 
 Chinese fortune cookies source: http://www.fortunecookiemessage.com
 
