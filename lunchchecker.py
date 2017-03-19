@@ -262,7 +262,7 @@ def GetMenuBlackPoint():
 
 def GetMenuDoubravnicka():
     """Get Doubravnicka lunch menu."""
-    Doubravnicka = {"url": "https://www.prvnidoubravnicka.cz/storage/files/menu_20_-_24-3-2017.pdf"}
+    Doubravnicka = {"url": "https://www.prvnidoubravnicka.cz/menu"}
     Doubravnicka["Name"] = "Restaurace Doubravnická"
     Doubravnicka["Info"] = "Polévka v ceně menu"
     Doubravnicka["Icon"] = "https://scontent.fprg1-1.fna.fbcdn.net/v/t31.0-8/15972450_379599622398428_669626150077024214_o.jpg?oh=b3e0be7e028033a077bf49679323543d&oe=596C2776"
