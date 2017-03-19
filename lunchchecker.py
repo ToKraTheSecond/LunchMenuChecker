@@ -260,6 +260,15 @@ def GetMenuBlackPoint():
 
     return BlackPoint
 
+def GetMenuDoubravnicka():
+    """Get Doubravnicka lunch menu."""
+    Doubravnicka = {"url": "https://www.prvnidoubravnicka.cz/storage/files/menu_20_-_24-3-2017.pdf"}
+    Doubravnicka["Name"] = "Restaurace Doubravnická"
+    Doubravnicka["Info"] = "Polévka v ceně menu"
+    Doubravnicka["Icon"] = "https://scontent.fprg1-1.fna.fbcdn.net/v/t31.0-8/15972450_379599622398428_669626150077024214_o.jpg?oh=b3e0be7e028033a077bf49679323543d&oe=596C2776"
+    Doubravnicka["CardPay"] = "Ano"
+
+    return Doubravnicka
 
 def GetPostFortuneCookie(url):
     """Get and post fortune cookie."""
@@ -321,8 +330,7 @@ def PostRestaurantsLinks(url):
         '**Stern**': 'https://www.restu.cz/stern-1888-original-restaurant/denni-menu/',
         '**La Spernaza**': 'http://lasperanza-bistro.cz/menu-complete/',
         '**Pivnice Pegas**': 'http://brnorestauracepivnice.hotelpegas.cz/denni-menu/',
-        '**Cattani**': 'http://www.cattani.cz/',
-	    '**Doubravnicka**': 'https://www.zomato.com/cs/brno/1-doubravnick%C3%A1-restaurace-%C4%8Dern%C3%A1-pole-brno-st%C5%99ed/denn%C3%AD-menu',
+        '**Cattani**': 'http://www.cattani.cz/'
     }
 
     body = '**Ostatní restaurace:**\n'
@@ -367,7 +375,7 @@ if __name__ == "__main__":
         day = 0
 
     #Checks second argument
-    if argv[2] in {'GetMenuSabaidy', 'GetMenuOsmicka', 'GetMenuBlackPoint', 'GetMenuBuddha', 'GetMenuGoldenNepal'}:
+    if argv[2] in {'GetMenuSabaidy', 'GetMenuOsmicka', 'GetMenuBlackPoint', 'GetMenuBuddha', 'GetMenuGoldenNepal', 'GetMenuDoubravnicka'}:
         try:
             PostMenu(getattr(sys.modules[__name__], argv[2])(), url)
         except:
@@ -384,7 +392,8 @@ if __name__ == "__main__":
         GetMenuBuddha,
         GetMenuGoldenNepal,
         GetMenuSabaidy,
-        GetMenuOsmicka
+        GetMenuOsmicka,
+        GetMenuDoubravnicka
     ]
 
     for func in func_list:
