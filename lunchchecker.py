@@ -262,7 +262,7 @@ def GetMenuBlackPoint():
 
 def GetMenuDoubravnicka():
     """Get Doubravnicka lunch menu."""
-    Doubravnicka = {"url": "https://www.prvnidoubravnicka.cz/menu"}
+    Doubravnicka = {"url": "https://www.zomato.com/cs/brno/1-doubravnick%C3%A1-restaurace-%C4%8Dern%C3%A1-pole-brno-st%C5%99ed"}
     Doubravnicka["Name"] = "Restaurace Doubravnická"
     Doubravnicka["Info"] = "Polévka v ceně menu"
     Doubravnicka["Icon"] = "https://scontent.fprg1-1.fna.fbcdn.net/v/t31.0-8/15972450_379599622398428_669626150077024214_o.jpg?oh=b3e0be7e028033a077bf49679323543d&oe=596C2776"
@@ -325,12 +325,14 @@ def PostRestaurantsLinks(url):
         '**Zelená Kočka - Solniční**': 'http://www.zelenakocka.cz/index2.php',
         '**Tulip**': 'http://tulip-restaurant.cz/cs/menu/',
         '**Annapurna**': 'http://indicka-restaurace-annapurna.cz/index.php?option=com_content&view=article&id=2&Itemid=118',
-        '**Everest**': 'http://www.restauraceeverest.cz/poledni-menu.html',
+        '**Everest**': 'https://www.zomato.com/cs/brno/everest-veve%C5%99%C3%AD-brno-st%C5%99ed/denn%C3%AD-menu',
         '**Satyam**': 'http://www.satyam.cz/cs/denni-menu.aspx',
         '**Stern**': 'https://www.restu.cz/stern-1888-original-restaurant/denni-menu/',
         '**La Spernaza**': 'http://lasperanza-bistro.cz/menu-complete/',
         '**Pivnice Pegas**': 'http://brnorestauracepivnice.hotelpegas.cz/denni-menu/',
-        '**Cattani**': 'http://www.cattani.cz/'
+        '**Cattani**': 'http://www.cattani.cz/',
+        '**U Starýho Billa**': 'https://www.zomato.com/cs/brno/u-star%C3%BDho-billa-%C4%8Dern%C3%A1-pole-brno-st%C5%99ed',
+        '**Korejské bistro Doširak**': 'https://www.zomato.com/cs/brno/korejsk%C3%A9-bistro-do%C5%A1irak-kr%C3%A1lovo-pole-brno-sever'
     }
 
     body = '**Ostatní restaurace:**\n'
