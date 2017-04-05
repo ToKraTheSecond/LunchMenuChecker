@@ -332,7 +332,8 @@ def PostRestaurantsLinks(url):
         '**Pivnice Pegas**': 'http://brnorestauracepivnice.hotelpegas.cz/denni-menu/',
         '**Cattani**': 'http://www.cattani.cz/',
         '**U Starýho Billa**': 'https://www.zomato.com/cs/brno/u-star%C3%BDho-billa-%C4%8Dern%C3%A1-pole-brno-st%C5%99ed',
-        '**Korejské bistro Doširak**': 'https://www.zomato.com/cs/brno/korejsk%C3%A9-bistro-do%C5%A1irak-kr%C3%A1lovo-pole-brno-sever'
+        '**Korejské bistro Doširak**': 'https://www.zomato.com/cs/brno/korejsk%C3%A9-bistro-do%C5%A1irak-kr%C3%A1lovo-pole-brno-sever',
+        '**Vietnam**': 'http://vietnamskebagety.cz/'
     }
 
     body = '**Ostatní restaurace:**\n'
