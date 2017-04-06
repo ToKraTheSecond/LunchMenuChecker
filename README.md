@@ -22,7 +22,7 @@ pip install -r requirements.txt
 
 # How to use
 
-Type of conversation (test/team) and restaurant is selected by two input parameteres during script call.
+Type of conversation (test/team) and restaurant is selected by two input arguments during script call.
 
 First argument is for conversation selection.
 
