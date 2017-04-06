@@ -321,19 +321,19 @@ def PostMenu(menu_dict, url):
 def PostRestaurantsLinks(url):
     """Send restaurants names and lunch menu links to given Glip URL."""
     links = {
-        '**King´s Head**': 'http://kingshead.cz/denni-menu/',
-        '**Zelená Kočka - Solniční**': 'http://www.zelenakocka.cz/index2.php',
-        '**Tulip**': 'http://tulip-restaurant.cz/cs/menu/',
-        '**Annapurna**': 'http://indicka-restaurace-annapurna.cz/index.php?option=com_content&view=article&id=2&Itemid=118',
-        '**Everest**': 'https://www.zomato.com/cs/brno/everest-veve%C5%99%C3%AD-brno-st%C5%99ed/denn%C3%AD-menu',
-        '**Satyam**': 'http://www.satyam.cz/cs/denni-menu.aspx',
-        '**Stern**': 'https://www.restu.cz/stern-1888-original-restaurant/denni-menu/',
-        '**La Spernaza**': 'http://lasperanza-bistro.cz/menu-complete/',
-        '**Pivnice Pegas**': 'http://brnorestauracepivnice.hotelpegas.cz/denni-menu/',
-        '**Cattani**': 'http://www.cattani.cz/',
-        '**U Starýho Billa**': 'https://www.zomato.com/cs/brno/u-star%C3%BDho-billa-%C4%8Dern%C3%A1-pole-brno-st%C5%99ed',
-        '**Korejské bistro Doširak**': 'https://www.zomato.com/cs/brno/korejsk%C3%A9-bistro-do%C5%A1irak-kr%C3%A1lovo-pole-brno-sever',
-        '**Vietnam**': 'http://vietnamskebagety.cz/'
+        '**King´s Head (5 min)**': 'http://kingshead.cz/denni-menu/',
+        '**Zelená Kočka - Solniční (10 min)**': 'http://www.zelenakocka.cz/index2.php',
+        '**Tulip (5 min)**': 'http://tulip-restaurant.cz/cs/menu/',
+        '**Annapurna (15 min)**': 'http://indicka-restaurace-annapurna.cz/index.php?option=com_content&view=article&id=2&Itemid=118',
+        '**Everest (15 min)**': 'https://www.zomato.com/cs/brno/everest-veve%C5%99%C3%AD-brno-st%C5%99ed/denn%C3%AD-menu',
+        '**Satyam (25 min)**': 'http://www.satyam.cz/cs/denni-menu.aspx',
+        '**Stern (5 min)**': 'https://www.restu.cz/stern-1888-original-restaurant/denni-menu/',
+        '**La Spernaza (10 min)**': 'http://lasperanza-bistro.cz/menu-complete/',
+        '**Pivnice Pegas (10 min)**': 'http://brnorestauracepivnice.hotelpegas.cz/denni-menu/',
+        '**Cattani (15 min)**': 'http://www.cattani.cz/',
+        '**U Starýho Billa (5 min)**': 'https://www.zomato.com/cs/brno/u-star%C3%BDho-billa-%C4%8Dern%C3%A1-pole-brno-st%C5%99ed',
+        '**Korejské bistro Doširak (25 min)**': 'https://www.zomato.com/cs/brno/korejsk%C3%A9-bistro-do%C5%A1irak-kr%C3%A1lovo-pole-brno-sever',
+        '**Vietnam (15 min)**': 'http://vietnamskebagety.cz/'
     }
 
     body = '**Ostatní restaurace:**\n'
