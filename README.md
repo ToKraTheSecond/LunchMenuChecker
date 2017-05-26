@@ -27,12 +27,14 @@ Type of conversation (test/team) and restaurant is selected by two input argumen
 First argument is for conversation selection.
 
 Test:
+
 t - test
 ```
 python lunchchecker.py t all
 ```
 
 Team:
+
 o - obedy
 ```
 python lunchchecker.py o all
