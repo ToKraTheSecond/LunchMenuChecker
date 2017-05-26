@@ -333,7 +333,9 @@ def PostRestaurantsLinks(url):
         '**Cattani (15 min)**': 'http://www.cattani.cz/',
         '**U Starýho Billa (5 min)**': 'https://www.zomato.com/cs/brno/u-star%C3%BDho-billa-%C4%8Dern%C3%A1-pole-brno-st%C5%99ed',
         '**Korejské bistro Doširak (25 min)**': 'https://www.zomato.com/cs/brno/korejsk%C3%A9-bistro-do%C5%A1irak-kr%C3%A1lovo-pole-brno-sever',
-        '**Vietnam (15 min)**': 'http://vietnamskebagety.cz/'
+        '**Vietnam (15 min)**': 'http://vietnamskebagety.cz/',
+        '**Polévkárna Schodová (15 min)**': 'https://www.polevkarnapodschody.cz/inpage/tydenni-nabidka/',
+        '**Restaurace TřiOcásci (5 min)**':  'https://triocasci.cz/jidlo/'
     }
 
     body = '**Ostatní restaurace:**\n'
