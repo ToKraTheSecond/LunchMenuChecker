@@ -355,7 +355,7 @@ if __name__ == "__main__":
         url_list = f.readlines()
 
     url_test = url_list[2][:-1]
-    url_conv = url_list[4]
+    url_conv = url_list[4][:-1]
     url = argv[1]
 
     #Checks first argument
