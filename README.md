@@ -6,6 +6,7 @@ Get menu from:
 - GoldenNepal
 - Sabaidy
 - Osmicka
+- TriOcasci
 
 restaurants and post it to Glip conversation via Glip WebHooks.
 
