@@ -46,3 +46,6 @@ Second argument is for restaurant selection:
 python lunchchecker.py o all
 python lunchchecker.py o GetMenuRestaurantname
 ```
+
+# License
+Project is licenced under GNU GPLv3 License
