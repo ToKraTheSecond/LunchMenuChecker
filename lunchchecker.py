@@ -261,7 +261,7 @@ def GetMenuBlackPoint():
     return BlackPoint
 
 def GetMenuTriOcasci():
-    """Get BlackPoint lunch menu."""
+    """Get TriOcasci lunch menu."""
     TriOcasci = {"url": "https://triocasci.cz/jidlo/"}
     TriOcasci["Name"] = "Tři ocásci: Veganská restaurace"
     TriOcasci["Info"] = "Polévka není v ceně menu. Je možné ji objednat samostatně."
@@ -284,12 +284,12 @@ def GetMenuTriOcasci():
         menu_extracted_day = findall("Čt(.*?)Pá", menu_extracted, DOTALL)
     elif(day == 4):
         menu_extracted_day = findall("Pá(.*?)script", menu_extracted, DOTALL)
-    
+
     menu_courses = findall(r"li>([A-Z,Č,Ď,Ř,Š,Ť,Ž].*?)<span", menu_extracted_day[0], DOTALL)
     menu_prices = findall(r"price\">([1-9].*?)</span", menu_extracted_day[0], DOTALL)
-    
+
     TriOcasci["Polévka"] = menu_courses[0] + " " + menu_prices[0]
-    
+
     TriOcasci["Menu 1"] = dict()
     TriOcasci["Menu 1"]["menu"] = menu_courses[1]
     TriOcasci["Menu 1"]["cena"] = menu_prices[1]
@@ -300,8 +300,51 @@ def GetMenuTriOcasci():
         TriOcasci["Menu 2"]["cena"] = menu_prices[2]
     else:
         print("TriOcasci does not have second menu!")
-    
+
     return TriOcasci
+
+def GetMenuPonava():
+    """Get Ponava lunch menu."""
+    Ponava = {"url": "http://ponava.cafe/"}
+    Ponava["Name"] = "Kavárna a restaurace"
+    Ponava["Info"] = "Polévka je v ceně menu."
+    Ponava["Icon"] = "http://ponava.cafe/wp-content/uploads/2017/06/logo.png"
+    Ponava["CardPay"] = "??"
+
+    r = get("http://ponava.cafe/")
+    r.encoding = 'utf-8'
+
+    soup = BeautifulSoup(r.text, "html5lib")  # Gets html code
+    menu_extracted = sub(r'[\t\n\r]', '', str(soup)).replace('\xa0', '')
+
+
+    if(day == 0):
+        menu_extracted_day = findall("Pondělí(.*?)Úterý", menu_extracted, DOTALL)
+    elif(day == 1):
+        menu_extracted_day = findall("Úterý(.*?)Středa", menu_extracted, DOTALL)
+    elif(day == 2):
+        menu_extracted_day = findall("Středa(.*?)Čtvrtek", menu_extracted, DOTALL)
+    elif(day == 3):
+        menu_extracted_day = findall("Čtvrtek(.*?)Pátek", menu_extracted, DOTALL)
+    elif(day == 4):
+        menu_extracted_day = findall("Pátek(.*?)</p><span class", menu_extracted, DOTALL)
+
+    menu_courses = findall(r"<p>M([A-Z,Č,Ď,Ř,Š,Ť,Ž,0-9,(,),-].*?)</p>", menu_extracted_day[0], DOTALL)
+    menu_soup = findall(r"<p>([A-Z,Č,Ď,Ř,Š,Ť,Ž,0-9,(,),-].*?)</p>", menu_extracted_day[0], DOTALL)
+    menu1_prices = findall(r"Menu 1: ([1-9].*?)<br", menu_extracted, DOTALL)
+    menu2_prices = findall(r"Menu 2: ([1-9].*?)</h4>", menu_extracted, DOTALL)
+
+    Ponava["Polévka"] = menu_soup[0]
+
+    Ponava["Menu 1"] = dict()
+    Ponava["Menu 1"]["menu"] = menu_courses[0]
+    Ponava["Menu 1"]["cena"] = menu1_prices[0]
+
+    Ponava["Menu 2"] = dict()
+    Ponava["Menu 2"]["menu"] = menu_courses[1]
+    Ponava["Menu 2"]["cena"] = menu2_prices[0]
+
+    return Ponava
 
 def GetMenuDoubravnicka():
     """Get Doubravnicka lunch menu."""
@@ -377,8 +420,7 @@ def PostRestaurantsLinks(url):
         '**U Starýho Billa (5 min pěšky)**': 'https://www.zomato.com/cs/brno/u-star%C3%BDho-billa-%C4%8Dern%C3%A1-pole-brno-st%C5%99ed',
         '**Korejské bistro Doširak (25 min šalina)**': 'https://www.zomato.com/cs/brno/korejsk%C3%A9-bistro-do%C5%A1irak-kr%C3%A1lovo-pole-brno-sever',
         '**Vietnam (15 min šalina)**': 'http://vietnamskebagety.cz/',
-        '**Polévkárna Schodová (15 min pěšky)**': 'https://www.polevkarnapodschody.cz/inpage/tydenni-nabidka/',
-        '**Restaurace Ponava (5 min pěšky)**': 'http://ponava.cafe/CS/restaurace/'
+        '**Polévkárna Schodová (15 min pěšky)**': 'https://www.polevkarnapodschody.cz/inpage/tydenni-nabidka/'
     }
 
     body = '**Ostatní restaurace:**\n'
@@ -417,13 +459,12 @@ if __name__ == "__main__":
     # We are looking for next day menu after 14:30.
     if time.hour > 15:
         day += 1
-
     # We will look for monday if it is saturday or sunday.
     if day == 5 or day == 6:
         day = 0
 
     #Checks second argument
-    if argv[2] in {'GetMenuSabaidy', 'GetMenuOsmicka', 'GetMenuBlackPoint', 'GetMenuBuddha', 'GetMenuGoldenNepal', 'GetMenuDoubravnicka', 'GetMenuTriOcasci'}:
+    if argv[2] in {'GetMenuSabaidy', 'GetMenuOsmicka', 'GetMenuBlackPoint', 'GetMenuBuddha', 'GetMenuGoldenNepal', 'GetMenuDoubravnicka', 'GetMenuTriOcasci', 'GetMenuPonava'}:
         try:
             PostMenu(getattr(sys.modules[__name__], argv[2])(), url)
         except:
@@ -442,7 +483,8 @@ if __name__ == "__main__":
         GetMenuSabaidy,
         GetMenuOsmicka,
         GetMenuDoubravnicka,
-        GetMenuTriOcasci
+        GetMenuTriOcasci,
+        GetMenuPonava
     ]
 
     for func in func_list:
