@@ -7,6 +7,7 @@ Get menu from:
 - Sabaidy
 - Osmicka
 - TriOcasci
+- Ponava
 
 restaurants and post it to Glip conversation via Glip WebHooks.
 
