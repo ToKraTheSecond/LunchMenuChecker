@@ -306,7 +306,7 @@ def GetMenuTriOcasci():
 def GetMenuPonava():
     """Get Ponava lunch menu."""
     Ponava = {"url": "http://ponava.cafe/"}
-    Ponava["Name"] = "Kavárna a restaurace"
+    Ponava["Name"] = "Ponava: Kavárna a restaurace"
     Ponava["Info"] = "Polévka je v ceně menu."
     Ponava["Icon"] = "http://ponava.cafe/wp-content/uploads/2017/06/logo.png"
     Ponava["CardPay"] = "??"
