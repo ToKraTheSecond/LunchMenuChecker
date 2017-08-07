@@ -6,9 +6,10 @@ from requests import get, post
 from json import dumps
 from datetime import datetime
 from bs4 import BeautifulSoup
-from sys import argv, exit
+from sys import exit
 import sys
 import argparse
+import random
 
 def GetMenuBuddha():
     """Get Buddha lunch menu."""
@@ -359,23 +360,25 @@ def GetMenuDoubravnicka():
 
 def GetPostFortuneCookie(url):
     """Get and post fortune cookie."""
-    r = get("http://www.fortunecookiemessage.com")
-    r.encoding = 'utf-8'
 
-    soup = BeautifulSoup(r.text, "html5lib").text
-    cookie = sub(r'[\t\n\r]', '', str(soup))
-    cookie_extracted = findall(r"([A-Za-z][0-9a-zA-Z\b-';:,.()?]{15,100}[.!?\b])", cookie, DOTALL)[1]
+    if random.randint(1, 3) != 1:
+        r = get("http://www.fortunecookiemessage.com")
+        r.encoding = 'utf-8'
+        soup = BeautifulSoup(r.text, "html5lib").text
+        cookie = sub(r'[\t\n\r]', '', str(soup))
+        cookie_extracted = findall(r"([A-Za-z][0-9a-zA-Z\b-';:,.()?]{15,100}[.!?\b])", cookie, DOTALL)[1]
+    else:
+        cookie_extracted = local_fortune_cookie[random.randint(1, len(local_fortunecookie))][:-1]
 
     body = "\nFortune Cookie of the Day\n" \
         + "\n**" + cookie_extracted + "**\n\n"
-
     payload = {'body': body}
     headers = {'content-type': 'application/json'}
     response = post(url, data=dumps(payload), headers=headers)
 
-
 def PostMenu(menu_dict, url):
     """Send given menu to given Glip URL."""
+
     body = menu_dict["url"] + "\n"
     body += menu_dict["Info"] + "\n"
 
@@ -436,17 +439,29 @@ def PostRestaurantsLinks(url):
     response = post(url, data=dumps(payload), headers=headers)
 
 if __name__ == "__main__":
+    day = datetime.today().weekday()
+    time = datetime.now().time()
+
+    if time.hour > 15:
+        day += 1
+
+    if day == 5 or day == 6:
+        day = 0
+
     with open('gliplinks.txt') as f:
         url_list = f.readlines()
+
+    with open('local_fortunecookie.txt') as ff:
+        local_fortunecookie = ff.readlines()
 
     url_test = url_list[2][:-1]
     url_conv = url_list[4][:-1]
     url = ''
 
     ap = argparse.ArgumentParser()
-    ap.add_argument("-t", "--type", required = True,
+    ap.add_argument("--type", required = True,
 	help = "Type of posting conversation t/o")
-    ap.add_argument("-r", "--restaurant", required = True,
+    ap.add_argument("--restaurant", required = True,
 	help = "Name of restaurant for menu post.")
     args = vars(ap.parse_args())
 
@@ -457,27 +472,18 @@ if __name__ == "__main__":
     else:
         raise Exception('Wrong first argument!')
         exit()
-    print(args["restaurant"])
+
     if args["restaurant"] in {'Sabaidy', 'Osmicka', 'BlackPoint', 'Buddha', 'GoldenNepal', 'Doubravnicka', 'TriOcasci', 'Ponava'}:
         try:
-            PostMenu(getattr(sys.modules[__name__], 'GetMenu' + args["type"])(), url)
+            PostMenu(getattr(sys.modules[__name__], 'GetMenu' + args["restaurant"])(), url)
         except:
-            print("GetMenu{} failed!".format(args["type"]))
+            print("GetMenu{} failed!".format(args["restaurant"]))
         exit()
     elif args["restaurant"] == 'all':
         pass
     else:
         raise Exception('Wrong second argument!')
         exit()
-
-    day = datetime.today().weekday()
-    time = datetime.now().time()
-
-    if time.hour > 15:
-        day += 1
-
-    if day == 5 or day == 6:
-        day = 0
 
     func_list = [
         GetMenuBlackPoint,
