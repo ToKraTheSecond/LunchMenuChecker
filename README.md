@@ -11,7 +11,7 @@ Get menu from:
 
 restaurants and post it to Glip conversation via Glip WebHooks.
 
-Chinese fortune cookies source: http://www.fortunecookiemessage.com
+Chinese fortune cookies source: http://www.fortunecookiemessage.com and local txt file.
 
 # Install
 
