@@ -32,20 +32,20 @@ Test:
 
 t - test
 ```
-python lunchchecker.py t all
+python lunchchecker.py -type t -restaurant all
 ```
 
 Team:
 
 o - obedy
 ```
-python lunchchecker.py o all
+python lunchchecker.py -type o -restaurant all
 ```
 Second argument is for restaurant selection:
 
 ```
-python lunchchecker.py o all
-python lunchchecker.py o GetMenuRestaurantname
+python lunchchecker.py -type o -restaurant all
+python lunchchecker.py -type o -restaurant restaurant_name
 ```
 
 # License
