@@ -8,6 +8,7 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 from sys import argv, exit
 import sys
+import argparse
 
 def GetMenuBuddha():
     """Get Buddha lunch menu."""
@@ -20,7 +21,7 @@ def GetMenuBuddha():
     r = get(buddha["url"])
     r.encoding = 'utf-8'
 
-    soup = BeautifulSoup(r.text, "html5lib")  # gets html code
+    soup = BeautifulSoup(r.text, "html5lib")
     menu = soup.findAll("p", {"class", "textmenu"})
     menu_extracted = sub(r'[\t\n\r]', '', str(menu).replace("<br/>", "")
                                                    .replace("&amp;", " a "))
@@ -435,46 +436,48 @@ def PostRestaurantsLinks(url):
     response = post(url, data=dumps(payload), headers=headers)
 
 if __name__ == "__main__":
-    # Import of Glip conversation links from external file
     with open('gliplinks.txt') as f:
         url_list = f.readlines()
 
     url_test = url_list[2][:-1]
     url_conv = url_list[4][:-1]
-    url = argv[1]
+    url = ''
 
-    #Checks first argument
-    if url == 't':
+    ap = argparse.ArgumentParser()
+    ap.add_argument("-t", "--type", required = True,
+	help = "Type of posting conversation t/o")
+    ap.add_argument("-r", "--restaurant", required = True,
+	help = "Name of restaurant for menu post.")
+    args = vars(ap.parse_args())
+
+    if args["type"] == 't':
         url = url_test
-    elif url == 'o':
+    elif args["type"] == 'o':
         url = url_conv
     else:
         raise Exception('Wrong first argument!')
         exit()
-
-    # Setting current datetime
-    day = datetime.today().weekday()
-    time = datetime.now().time()
-
-    # We are looking for next day menu after 14:30.
-    if time.hour > 15:
-        day += 1
-    # We will look for monday if it is saturday or sunday.
-    if day == 5 or day == 6:
-        day = 0
-
-    #Checks second argument
-    if argv[2] in {'GetMenuSabaidy', 'GetMenuOsmicka', 'GetMenuBlackPoint', 'GetMenuBuddha', 'GetMenuGoldenNepal', 'GetMenuDoubravnicka', 'GetMenuTriOcasci', 'GetMenuPonava'}:
+    print(args["restaurant"])
+    if args["restaurant"] in {'Sabaidy', 'Osmicka', 'BlackPoint', 'Buddha', 'GoldenNepal', 'Doubravnicka', 'TriOcasci', 'Ponava'}:
         try:
-            PostMenu(getattr(sys.modules[__name__], argv[2])(), url)
+            PostMenu(getattr(sys.modules[__name__], 'GetMenu' + args["type"])(), url)
         except:
-            print("{} failed!".format(argv[2]))
+            print("GetMenu{} failed!".format(args["type"]))
         exit()
-    elif argv[2] == 'all':
+    elif args["restaurant"] == 'all':
         pass
     else:
         raise Exception('Wrong second argument!')
         exit()
+
+    day = datetime.today().weekday()
+    time = datetime.now().time()
+
+    if time.hour > 15:
+        day += 1
+
+    if day == 5 or day == 6:
+        day = 0
 
     func_list = [
         GetMenuBlackPoint,
