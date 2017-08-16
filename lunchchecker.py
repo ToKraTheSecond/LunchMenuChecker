@@ -26,7 +26,6 @@ def GetMenuBuddha():
     menu = soup.findAll("p", {"class", "textmenu"})
     menu_extracted = sub(r'[\t\n\r]', '', str(menu).replace("<br/>", "")
                                                    .replace("&amp;", " a "))
-
     if(day == 0):
         menu_extracted_day = findall("PONDĚLÍ(.*?)ÚTERÝ", menu_extracted, DOTALL)
     elif(day == 1):
@@ -262,6 +261,7 @@ def GetMenuBlackPoint():
 
     return BlackPoint
 
+
 def GetMenuTriOcasci():
     """Get TriOcasci lunch menu."""
     TriOcasci = {"url": "https://triocasci.cz/jidlo/"}
@@ -305,6 +305,7 @@ def GetMenuTriOcasci():
 
     return TriOcasci
 
+
 def GetMenuPonava():
     """Get Ponava lunch menu."""
     Ponava = {"url": "http://ponava.cafe/"}
@@ -318,7 +319,6 @@ def GetMenuPonava():
 
     soup = BeautifulSoup(r.text, "html5lib")  # Gets html code
     menu_extracted = sub(r'[\t\n\r]', '', str(soup)).replace('\xa0', '')
-
 
     if(day == 0):
         menu_extracted_day = findall("Pondělí(.*?)Úterý", menu_extracted, DOTALL)
@@ -348,6 +348,7 @@ def GetMenuPonava():
 
     return Ponava
 
+
 def GetMenuDoubravnicka():
     """Get Doubravnicka lunch menu."""
     Doubravnicka = {"url": "https://www.zomato.com/cs/brno/1-doubravnick%C3%A1-restaurace-%C4%8Dern%C3%A1-pole-brno-st%C5%99ed/denn%C3%AD-menu"}
@@ -358,9 +359,9 @@ def GetMenuDoubravnicka():
 
     return Doubravnicka
 
-def GetPostFortuneCookie(url):
-    """Get and post fortune cookie."""
 
+def PostFortuneCookie(url):
+    """Get and post fortune cookie."""
     if random.randint(1, 3) != 1:
         r = get("http://www.fortunecookiemessage.com")
         r.encoding = 'utf-8'
@@ -368,13 +369,14 @@ def GetPostFortuneCookie(url):
         cookie = sub(r'[\t\n\r]', '', str(soup))
         cookie_extracted = findall(r"([A-Za-z][0-9a-zA-Z\b-';:,.()?]{15,100}[.!?\b])", cookie, DOTALL)[1]
     else:
-        cookie_extracted = local_fortune_cookie[random.randint(1, len(local_fortunecookie))][:-1]
-
+        cookie_extracted = local_fortunecookie[random.randint(1, len(local_fortunecookie))][:-1]
+        print(cookie_extracted)
     body = "\nFortune Cookie of the Day\n" \
         + "\n**" + cookie_extracted + "**\n\n"
     payload = {'body': body}
     headers = {'content-type': 'application/json'}
     response = post(url, data=dumps(payload), headers=headers)
+
 
 def PostMenu(menu_dict, url):
     """Send given menu to given Glip URL."""
@@ -437,10 +439,24 @@ def PostRestaurantsLinks(url):
 
     headers = {'content-type': 'application/json'}
     response = post(url, data=dumps(payload), headers=headers)
+    
 
 if __name__ == "__main__":
     day = datetime.today().weekday()
     time = datetime.now().time()
+
+    func_list = [
+        GetMenuBlackPoint,
+        GetMenuBuddha,
+        GetMenuGoldenNepal,
+        GetMenuSabaidy,
+        GetMenuOsmicka,
+        GetMenuDoubravnicka,
+        GetMenuTriOcasci,
+        GetMenuPonava,
+        PostRestaurantsLinks,
+        PostFortuneCookie
+    ]
 
     if time.hour > 15:
         day += 1
@@ -461,46 +477,33 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--type", required = True,
 	help = "Type of posting conversation t/o")
-    ap.add_argument("--restaurant", required = True,
-	help = "Name of restaurant for menu post.")
+    ap.add_argument("--postfunc", required = True,
+	help = "Name of posting function.")
     args = vars(ap.parse_args())
 
     if args["type"] == 't':
         url = url_test
     elif args["type"] == 'o':
         url = url_conv
-    else:
-        raise Exception('Wrong first argument!')
-        exit()
 
-    if args["restaurant"] in {'Sabaidy', 'Osmicka', 'BlackPoint', 'Buddha', 'GoldenNepal', 'Doubravnicka', 'TriOcasci', 'Ponava'}:
+    if args["postfunc"] in (str(x.__name__) for x in func_list):
         try:
-            PostMenu(getattr(sys.modules[__name__], 'GetMenu' + args["restaurant"])(), url)
+            if args["postfunc"] == 'PostRestaurantsLinks':
+                PostRestaurantsLinks(url)
+            elif args["postfunc"] == 'PostFortuneCookie':
+                PostFortuneCookie(url)
+            else:
+                PostMenu(getattr(sys.modules[__name__], args["postfunc"])(), url)
         except:
-            print("GetMenu{} failed!".format(args["restaurant"]))
-        exit()
-    elif args["restaurant"] == 'all':
-        pass
+            print("{} failed!".format(args["postfunc"]))
     else:
-        raise Exception('Wrong second argument!')
-        exit()
-
-    func_list = [
-        GetMenuBlackPoint,
-        GetMenuBuddha,
-        GetMenuGoldenNepal,
-        GetMenuSabaidy,
-        GetMenuOsmicka,
-        GetMenuDoubravnicka,
-        GetMenuTriOcasci,
-        GetMenuPonava
-    ]
-
-    for func in func_list:
-        try:
-            PostMenu(func(), url)
-        except:
-            print("{} failed.".format(func.__name__) )
-
-    PostRestaurantsLinks(url)
-    GetPostFortuneCookie(url)
+        for func in func_list:
+            try:
+                if str(func.__name__) == 'PostRestaurantsLinks':
+                    PostRestaurantsLinks(url)
+                elif str(func.__name__) == 'PostFortuneCookie':
+                    PostFortuneCookie(url)
+                else:
+                    PostMenu(func(), url)
+            except:
+                print("{} failed.".format(func.__name__) )
