@@ -459,6 +459,7 @@ if __name__ == "__main__":
         GetMenuDoubravnicka,
         GetMenuTriOcasci,
         GetMenuPonava,
+        GetMenuBishesGurkha,
         PostRestaurantsLinks,
         PostFortuneCookie
     ]
