@@ -8,6 +8,7 @@ Get menu from:
 - Osmicka
 - TriOcasci
 - Ponava
+- BishesGurkha
 
 restaurants and post it to Glip conversation via Glip WebHooks.
 
