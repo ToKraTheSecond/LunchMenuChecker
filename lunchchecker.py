@@ -418,34 +418,6 @@ def PostMenu(menu_dict, url):
     headers = {'content-type': 'application/json'}
     response = post(url, data=dumps(payload), headers=headers)
 
-
-def PostRestaurantsLinks(url):
-    """Send restaurants names and lunch menu links to given Glip URL."""
-    links = {
-        '**King´s Head**': 'http://kingshead.cz/denni-menu/',
-        '**Annapurna**': 'http://indicka-restaurace-annapurna.cz/index.php?option=com_content&view=article&id=2&Itemid=118',
-        '**Everest**': 'https://www.zomato.com/cs/brno/everest-veve%C5%99%C3%AD-brno-st%C5%99ed/denn%C3%AD-menu',
-        '**Stern**': 'https://www.restu.cz/stern-1888-original-restaurant/denni-menu/',
-        '**La Spernaza**': 'http://lasperanza-bistro.cz/menu-complete/',
-        '**Pivnice Pegas**': 'http://brnorestauracepivnice.hotelpegas.cz/denni-menu/',
-        '**Cattani**': 'http://www.cattani.cz/',
-        '**Korejské bistro Doširak**': 'https://www.zomato.com/cs/brno/korejsk%C3%A9-bistro-do%C5%A1irak-kr%C3%A1lovo-pole-brno-sever',
-        '**Vietnam**': 'http://vietnamskebagety.cz/',
-        '**Polévkárna Schodová**': 'https://www.polevkarnapodschody.cz/inpage/tydenni-nabidka/'
-    }
-
-    body = '**Ostatní restaurace:**\n'
-
-    for key in links:
-        body += key + ": \n"
-        body += links.get(key) + "\n"
-
-    payload = {'body': body}
-
-    headers = {'content-type': 'application/json'}
-    response = post(url, data=dumps(payload), headers=headers)
-
-
 if __name__ == "__main__":
     day = datetime.today().weekday()
     time = datetime.now().time()
@@ -455,12 +427,11 @@ if __name__ == "__main__":
         GetMenuBuddha,
         GetMenuGoldenNepal,
         GetMenuSabaidy,
+        GetMenuBishesGurkha,
         GetMenuOsmicka,
         GetMenuDoubravnicka,
         GetMenuTriOcasci,
         GetMenuPonava,
-        GetMenuBishesGurkha,
-        PostRestaurantsLinks,
         PostFortuneCookie
     ]
 
@@ -494,9 +465,7 @@ if __name__ == "__main__":
 
     if args["postfunc"] in (str(x.__name__) for x in func_list):
         try:
-            if args["postfunc"] == 'PostRestaurantsLinks':
-                PostRestaurantsLinks(url)
-            elif args["postfunc"] == 'PostFortuneCookie':
+            if args["postfunc"] == 'PostFortuneCookie':
                 PostFortuneCookie(url)
             else:
                 PostMenu(getattr(sys.modules[__name__], args["postfunc"])(), url)
@@ -505,9 +474,7 @@ if __name__ == "__main__":
     else:
         for func in func_list:
             try:
-                if str(func.__name__) == 'PostRestaurantsLinks':
-                    PostRestaurantsLinks(url)
-                elif str(func.__name__) == 'PostFortuneCookie':
+                if str(func.__name__) == 'PostFortuneCookie':
                     PostFortuneCookie(url)
                 else:
                     PostMenu(func(), url)
