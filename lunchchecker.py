@@ -439,11 +439,8 @@ if __name__ == "__main__":
     if datetime.datetime.date(datetime.datetime.now()) in holidays:
         sys.exit()
 
-    if time.hour > 15:
-        day += 1
-
     if day == 5 or day == 6:
-        day = 0
+        sys.exit()
 
     with open('gliplinks.txt') as f:
         url_list = f.readlines()
