@@ -7,6 +7,7 @@ from json import dumps
 from datetime import datetime
 from bs4 import BeautifulSoup
 from sys import exit
+from czech_holidays import holidays
 import sys
 import argparse
 import random
@@ -434,6 +435,9 @@ if __name__ == "__main__":
         GetMenuPonava,
         PostFortuneCookie
     ]
+
+    if datetime.datetime.date(datetime.datetime.now()) in holidays:
+        sys.exit()
 
     if time.hour > 15:
         day += 1
