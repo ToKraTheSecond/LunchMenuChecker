@@ -436,7 +436,7 @@ if __name__ == "__main__":
         PostFortuneCookie
     ]
 
-    if datetime.datetime.date(datetime.datetime.now()) in holidays:
+    if datetime.date(datetime.now()) in holidays:
         sys.exit()
 
     if day == 5 or day == 6:
