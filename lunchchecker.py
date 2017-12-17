@@ -80,6 +80,7 @@ if __name__ == "__main__":
         PostFortuneCookie
     ]
 
+'''
     get_link_func_list = [
         GetLinkBuddha,
         GetLinkGoldenNepal,
@@ -90,7 +91,7 @@ if __name__ == "__main__":
         GetLinkTriOcasci,
         GetLinkPonava,
     ]
-
+'''
     if datetime.date(datetime.now()) in holidays:
         sys.exit()
 
