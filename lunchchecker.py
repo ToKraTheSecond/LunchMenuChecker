@@ -8,7 +8,7 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 from sys import exit
 from czech_holidays import holidays
-import GetMenuGetLink
+from GetMenuGetLink import GetMenuBuddha, GetMenuGoldenNepal, GetMenuSabaidy, GetMenuBishesGurkha, GetMenuOsmicka, GetMenuDoubravnicka, GetMenuTriOcasci, GetMenuPonava
 import sys
 import argparse
 import random
@@ -80,7 +80,7 @@ if __name__ == "__main__":
         PostFortuneCookie
     ]
 
-'''
+    '''
     get_link_func_list = [
         GetLinkBuddha,
         GetLinkGoldenNepal,
@@ -91,7 +91,7 @@ if __name__ == "__main__":
         GetLinkTriOcasci,
         GetLinkPonava,
     ]
-'''
+    '''
     if datetime.date(datetime.now()) in holidays:
         sys.exit()
 
