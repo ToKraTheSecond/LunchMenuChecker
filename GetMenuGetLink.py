@@ -298,10 +298,10 @@ def GetMenuDoubravnicka():
 
 def GetMenuBishesGurkha():
     """Get Bishes Gurkha lunch menu."""
-    Doubravnicka = {"url": "https://www.zomato.com/cs/brno/bishes-gurkha-1-brno-m%C4%9Bsto-brno-st%C5%99ed/menu"}
-    Doubravnicka["Name"] = "Nepálská restaurace Bishes Gurkha"
-    Doubravnicka["Info"] = "Polévka v ceně menu"
-    Doubravnicka["Icon"] = "https://b.zmtcdn.com/data/pictures/8/18580968/c99dab2587bff230603ef94afdd7b48e.jpg?output-format=webp"
-    Doubravnicka["CardPay"] = "Ano"
+    BishesGurkha = {"url": "https://www.zomato.com/cs/brno/bishes-gurkha-1-brno-m%C4%9Bsto-brno-st%C5%99ed/menu"}
+    BishesGurkha["Name"] = "Nepálská restaurace Bishes Gurkha"
+    BishesGurkha["Info"] = "Polévka v ceně menu"
+    BishesGurkha["Icon"] = "https://b.zmtcdn.com/data/pictures/8/18580968/c99dab2587bff230603ef94afdd7b48e.jpg?output-format=webp"
+    BishesGurkha["CardPay"] = "Ano"
 
-    return Doubravnicka
+    return BishesGurkha
