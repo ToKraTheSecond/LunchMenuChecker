@@ -423,7 +423,7 @@ if __name__ == "__main__":
     day = datetime.today().weekday()
     time = datetime.now().time()
 
-    func_list = [
+    get_menu_func_list = [
         GetMenuBlackPoint,
         GetMenuBuddha,
         GetMenuGoldenNepal,
@@ -434,6 +434,18 @@ if __name__ == "__main__":
         GetMenuTriOcasci,
         GetMenuPonava,
         PostFortuneCookie
+    ]
+
+    get_link_func_list = [
+        GetLinkBlackPoint,
+        GetLinkBuddha,
+        GetLinkGoldenNepal,
+        GetLinkSabaidy,
+        GetLinkBishesGurkha,
+        GetLinkOsmicka,
+        GetLinkDoubravnicka,
+        GetLinkTriOcasci,
+        GetLinkPonava,
     ]
 
     if datetime.date(datetime.now()) in holidays:
@@ -464,7 +476,7 @@ if __name__ == "__main__":
     elif args["type"] == 'o':
         url = url_conv
 
-    if args["postfunc"] in (str(x.__name__) for x in func_list):
+    if args["postfunc"] in (str(x.__name__) for x in get_menu_func_list):
         try:
             if args["postfunc"] == 'PostFortuneCookie':
                 PostFortuneCookie(url)
@@ -473,7 +485,7 @@ if __name__ == "__main__":
         except:
             print("{} failed!".format(args["postfunc"]))
     else:
-        for func in func_list:
+        for func in get_menu_func_list:
             try:
                 if str(func.__name__) == 'PostFortuneCookie':
                     PostFortuneCookie(url)
