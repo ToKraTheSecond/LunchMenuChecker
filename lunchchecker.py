@@ -14,7 +14,6 @@ import argparse
 import random
 
 
-
 def PostFortuneCookie(url):
     """Get and post fortune cookie."""
     if random.randint(1, 3) != 1:
@@ -115,7 +114,7 @@ if __name__ == "__main__":
             else:
                 PostMenu(getattr(sys.modules[__name__], args["postfunc"])(), url)
         except:
-            print("{} failed!".format(args["postfunc"]))
+            print("Posting of {} failed!".format(args["postfunc"]))
     else:
         for func in get_menu_func_list:
             try:
@@ -124,4 +123,4 @@ if __name__ == "__main__":
                 else:
                     PostMenu(func(), url)
             except:
-                print("{} failed.".format(func.__name__) )
+                print("Posting of {} failed.".format(func.__name__) )
