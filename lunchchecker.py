@@ -33,7 +33,7 @@ def PostFortuneCookie(url):
     response = post(url, data=dumps(payload), headers=headers)
 
 
-def PostMenu(menu_dict, url):
+def PostMenu(parsed_menu_dict, url):
     """Send given menu to given Glip URL."""
 
     body = menu_dict["url"] + "\n"
