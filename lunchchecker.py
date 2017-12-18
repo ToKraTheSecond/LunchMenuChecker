@@ -8,7 +8,7 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 from sys import exit
 from czech_holidays import holidays
-from GetMenuGetLink import GetMenuBuddha, GetMenuGoldenNepal, GetMenuSabaidy, GetMenuBishesGurkha, GetMenuOsmicka, GetMenuDoubravnicka, GetMenuTriOcasci, GetMenuPonava
+from parsers import GetMenuBuddha, GetMenuGoldenNepal, GetMenuSabaidy, GetMenuBishesGurkha, GetMenuOsmicka, GetMenuDoubravnicka, GetMenuTriOcasci, GetMenuPonava
 import sys
 import argparse
 import random
