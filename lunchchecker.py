@@ -80,18 +80,6 @@ if __name__ == "__main__":
         PostFortuneCookie
     ]
 
-    '''
-    get_link_func_list = [
-        GetLinkBuddha,
-        GetLinkGoldenNepal,
-        GetLinkSabaidy,
-        GetLinkBishesGurkha,
-        GetLinkOsmicka,
-        GetLinkDoubravnicka,
-        GetLinkTriOcasci,
-        GetLinkPonava,
-    ]
-    '''
     if datetime.date(datetime.now()) in holidays:
         sys.exit()
 
