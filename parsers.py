@@ -1,4 +1,13 @@
-def GetMenuBuddha():
+from re import search, findall, DOTALL, sub
+from requests import get, post
+from json import dumps
+from datetime import datetime
+from bs4 import BeautifulSoup
+from sys import exit
+import sys
+import argparse
+
+def GetMenuBuddha(day):
     """Get Buddha lunch menu."""
     buddha = {"url": "http://www.indian-restaurant-buddha.cz/index.html"}
     buddha["Name"] = "Buddha: Indická a Nepálská Restaurace"
@@ -14,6 +23,7 @@ def GetMenuBuddha():
         menu = soup.findAll("p", {"class", "textmenu"})
         menu_extracted = sub(r'[\t\n\r]', '', str(menu).replace("<br/>", "")
                                                        .replace("&amp;", " a "))
+
         if(day == 0):
             menu_extracted_day = findall("PONDĚLÍ(.*?)ÚTERÝ", menu_extracted, DOTALL)
         elif(day == 1):
@@ -47,7 +57,7 @@ def GetMenuBuddha():
     return buddha
 
 
-def GetMenuOsmicka():
+def GetMenuOsmicka(day):
     """Get Osmicka lunch menu."""
     osmicka = {"url": "http://www.naosmicce.cz/Menu.pdf"}
     osmicka["Name"] = "Bistro na Osmičce: Burger and Pasta"
@@ -102,7 +112,7 @@ def GetMenuOsmicka():
     return osmicka
 
 
-def GetMenuGoldenNepal():
+def GetMenuGoldenNepal(day):
     """Get Golden Nepal lunch menu."""
     GoldenNepal = {"url": "http://goldennepal.cz/"}
     GoldenNepal["Name"] = "Golden Nepal: Nepálská restaurace a bar"
@@ -159,7 +169,7 @@ def GetMenuGoldenNepal():
     return GoldenNepal
 
 
-def GetMenuSabaidy():
+def GetMenuSabaidy(day):
     """Get Sabaidy lunch menu."""
     Sabaidy = {"url": "http://www.amphone.eu/restaurace"}
     Sabaidy["Name"] = "Sabaidy: Thajsko-laoská restaurace"
@@ -211,7 +221,7 @@ def GetMenuSabaidy():
 
     return Sabaidy
 
-def GetMenuTriOcasci():
+def GetMenuTriOcasci(day):
     """Get TriOcasci lunch menu."""
     TriOcasci = {"url": "https://triocasci.cz/jidlo/"}
     TriOcasci["Name"] = "Tři ocásci: Veganská restaurace"
@@ -253,12 +263,12 @@ def GetMenuTriOcasci():
         else:
             print("TriOcasci does not have second menu!")
     except:
-        print("TriOcasci failed!")
+        print("TriOcasci parser failed!")
 
     return TriOcasci
 
 
-def GetMenuPonava():
+def GetMenuPonava(day):
     """Get Ponava lunch menu."""
     Ponava = {"url": "http://ponava.cafe/"}
     Ponava["Name"] = "Ponava: Kavárna a restaurace"
@@ -304,7 +314,7 @@ def GetMenuPonava():
     return Ponava
 
 
-def GetMenuDoubravnicka():
+def GetMenuDoubravnicka(day):
     """Get Doubravnicka lunch menu."""
     Doubravnicka = {"url": "https://www.zomato.com/cs/brno/1-doubravnick%C3%A1-restaurace-%C4%8Dern%C3%A1-pole-brno-st%C5%99ed/denn%C3%AD-menu"}
     Doubravnicka["Name"] = "Restaurace Doubravnická"
@@ -314,7 +324,7 @@ def GetMenuDoubravnicka():
 
     return Doubravnicka
 
-def GetMenuBishesGurkha():
+def GetMenuBishesGurkha(day):
     """Get Bishes Gurkha lunch menu."""
     BishesGurkha = {"url": "https://www.zomato.com/cs/brno/bishes-gurkha-1-brno-m%C4%9Bsto-brno-st%C5%99ed/menu"}
     BishesGurkha["Name"] = "Nepálská restaurace Bishes Gurkha"

@@ -35,28 +35,28 @@ def PostFortuneCookie(url):
 def PostMenu(parsed_menu_dict, url):
     """Send given menu to given Glip URL."""
 
-    body = menu_dict["url"] + "\n"
-    body += menu_dict["Info"] + "\n"
+    body = parsed_menu_dict["url"] + "\n"
+    body += parsed_menu_dict["Info"] + "\n"
 
-    if "CardPay" in menu_dict.keys():
-        body += "**Platba kartou:** " + menu_dict["CardPay"] + "\n"
-    if "Polévka" in menu_dict.keys():
-        body += "**Polévka:** " + menu_dict["Polévka"] + "\n"
-    if "Menu 1" in menu_dict.keys():
-        body += "**Menu 1:** " + menu_dict["Menu 1"]["menu"] + " - " + str(menu_dict["Menu 1"]["cena"]) + "\n"
-    if "Menu 2" in menu_dict.keys():
-        body += "**Menu 2:** " + menu_dict["Menu 2"]["menu"] + " - " + str(menu_dict["Menu 2"]["cena"]) + "\n"
-    if "Menu 3" in menu_dict.keys():
-        body += "**Menu 3:** " + menu_dict["Menu 3"]["menu"] + " - " + str(menu_dict["Menu 3"]["cena"]) + "\n"
-    if "Menu 4" in menu_dict.keys():
-        body += "**Menu 4:** " + menu_dict["Menu 4"]["menu"] + " - " + str(menu_dict["Menu 4"]["cena"]) + "\n"
-    if "Menu 5" in menu_dict.keys():
-        body += "**Menu 5:** " + menu_dict["Menu 5"]["menu"] + " - " + str(menu_dict["Menu 5"]["cena"]) + "\n"
+    if "CardPay" in parsed_menu_dict.keys():
+        body += "**Platba kartou:** " + parsed_menu_dict["CardPay"] + "\n"
+    if "Polévka" in parsed_menu_dict.keys():
+        body += "**Polévka:** " + parsed_menu_dict["Polévka"] + "\n"
+    if "Menu 1" in parsed_menu_dict.keys():
+        body += "**Menu 1:** " + parsed_menu_dict["Menu 1"]["menu"] + " - " + str(parsed_menu_dict["Menu 1"]["cena"]) + "\n"
+    if "Menu 2" in parsed_menu_dict.keys():
+        body += "**Menu 2:** " + parsed_menu_dict["Menu 2"]["menu"] + " - " + str(parsed_menu_dict["Menu 2"]["cena"]) + "\n"
+    if "Menu 3" in parsed_menu_dict.keys():
+        body += "**Menu 3:** " + parsed_menu_dict["Menu 3"]["menu"] + " - " + str(parsed_menu_dict["Menu 3"]["cena"]) + "\n"
+    if "Menu 4" in parsed_menu_dict.keys():
+        body += "**Menu 4:** " + parsed_menu_dict["Menu 4"]["menu"] + " - " + str(parsed_menu_dict["Menu 4"]["cena"]) + "\n"
+    if "Menu 5" in parsed_menu_dict.keys():
+        body += "**Menu 5:** " + parsed_menu_dict["Menu 5"]["menu"] + " - " + str(parsed_menu_dict["Menu 5"]["cena"]) + "\n"
 
     payload = \
         {
-         'activity': menu_dict["Name"],
-    	 'icon': menu_dict["Icon"],
+         'activity': parsed_menu_dict["Name"],
+    	 'icon': parsed_menu_dict["Icon"],
     	 'body': body
         }
 
@@ -112,7 +112,7 @@ if __name__ == "__main__":
             if args["postfunc"] == 'PostFortuneCookie':
                 PostFortuneCookie(url)
             else:
-                PostMenu(getattr(sys.modules[__name__], args["postfunc"])(), url)
+                PostMenu(getattr(sys.modules[__name__], args["postfunc"])(day), url)
         except:
             print("Posting of {} failed!".format(args["postfunc"]))
     else:
@@ -121,6 +121,6 @@ if __name__ == "__main__":
                 if str(func.__name__) == 'PostFortuneCookie':
                     PostFortuneCookie(url)
                 else:
-                    PostMenu(func(), url)
+                    PostMenu(func(day), url)
             except:
-                print("Posting of {} failed.".format(func.__name__) )
+                print("{} posting failed.".format(func.__name__) )
