@@ -1,11 +1,7 @@
-from re import search, findall, DOTALL, sub
-from requests import get, post
+from re import findall, DOTALL, sub
+from requests import get
 from json import dumps
-from datetime import datetime
 from bs4 import BeautifulSoup
-from sys import exit
-import sys
-import argparse
 
 def GetMenuBuddha(day):
     """Get Buddha lunch menu."""
