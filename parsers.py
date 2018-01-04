@@ -20,17 +20,6 @@ def GetMenuKanasJidelna(day):
         menu = soup.findAll("div", {"class", "menu-list menu-list__dotted"})
         menu_extracted = sub(r'[\t\n\r]', '', str(menu))
 
-        if(day == 0):
-            menu_extracted_day = findall("Pondělí(.*?)Úterý", menu_extracted, DOTALL)
-        elif(day == 1):
-            menu_extracted_day = findall("Úterý(.*?)Středa", menu_extracted, DOTALL)
-        elif(day == 2):
-            menu_extracted_day = findall("Středa(.*?)Čtvrtek", menu_extracted, DOTALL)
-        elif(day == 3):
-            menu_extracted_day = findall("Čtvrtek(.*?)Pátek", menu_extracted, DOTALL)
-        elif(day == 4):
-            menu_extracted_day = findall("Pátek(.*?)Sobota", menu_extracted, DOTALL)
-
         menu_courses_czech = findall(r"content\">(.*?)</", menu_extracted_day[0], DOTALL)
         menu_courses_orig = findall(r"_title\">(.*?)</", menu_extracted_day[0], DOTALL)
         menu_courses = menu_courses_orig
