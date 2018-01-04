@@ -8,7 +8,7 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 from sys import exit
 from czech_holidays import holidays
-from parsers import GetMenuBuddha, GetMenuGoldenNepal, GetMenuSabaidy, GetMenuBishesGurkha, GetMenuOsmicka, GetMenuDoubravnicka, GetMenuTriOcasci, GetMenuPonava
+from parsers import KanasJidelna
 import sys
 import argparse
 import random
@@ -68,14 +68,7 @@ if __name__ == "__main__":
     time = datetime.now().time()
 
     get_menu_func_list = [
-        GetMenuBuddha,
-        GetMenuGoldenNepal,
-        GetMenuSabaidy,
-        GetMenuBishesGurkha,
-        GetMenuOsmicka,
-        GetMenuDoubravnicka,
-        GetMenuTriOcasci,
-        GetMenuPonava,
+        KanasJidelna,
         PostFortuneCookie
     ]
 
