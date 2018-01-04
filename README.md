@@ -1,14 +1,17 @@
 # Glip LunchMenuChecker for Python 3
 
 Get menu from:
-- BlackPoint
-- Buddha
-- GoldenNepal
-- Sabaidy
-- Osmicka
-- TriOcasci
-- Ponava
-- BishesGurkha
+- Inactive:
+  - BlackPoint
+  - Buddha
+  - GoldenNepal
+  - Sabaidy
+  - Osmicka
+  - TriOcasci
+  - Ponava
+  - BishesGurkha
+- Active:
+  - Kanas jidelna
 
 restaurants and post it to Glip conversation via Glip WebHooks.
 
