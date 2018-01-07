@@ -4,11 +4,11 @@ from json import dumps
 from bs4 import BeautifulSoup
 
 def GetMenuKanas(day):
-    kanasJidelna = {"url": "http://www.kanas.cz/stranka/jidelna"}
-    kanasJidelna["Name"] = "Kanas"
-    kanasJidelna["Info"] = "5 minut"
-    kanasJidelna["Icon"] = "http://www.barber-schools.org/wp-content/uploads/2013/02/state-flag-kansas.jpg"
-    kanasJidelna["CardPay"] = "Ano"
+    kanas = {"url": "http://www.kanas.cz/stranka/jidelna"}
+    kanas["Name"] = "Kanas" + '\n'
+    kanas["Info"] = "Cesta: 5 minut" + '\n'
+    kanas["Icon"] = "http://www.barber-schools.org/wp-content/uploads/2013/02/state-flag-kansas.jpg"
+    kanas["CardPay"] = "Platba kartou: Ano" + '\n'
 
     try:
         kanasTemp = kanas
@@ -19,19 +19,18 @@ def GetMenuKanas(day):
         soup = BeautifulSoup(r.text, "html5lib")  # Gets html code
         menu = soup.findAll("div", {"class", "nabidka-in tab_container"})
         menu_extracted = sub(r'[\t\n\r]', '', str(menu))
-        print(menu_extracted)
-        menu_extracted = findall(r"id=\"tab2(.*?)class=\"cle", menu_extracted, DOTALL)
-        print(menu_extracted[0])
+        menu_extracted = findall(r"polozka(.*?)-</", menu_extracted, DOTALL)
 
-        menu_courses = findall(r"content\">(.*?)</", menu_extracted_day[0], DOTALL)
-        menu_prices = findall(r"price\">(.*?)</", menu_extracted_day[0], DOTALL)
+        mealAmount = findall(r"stvi\">(.*?)<", ' '.join(menu_extracted), DOTALL)
+        mealName = findall(r"idlo\">(.*?)<", ' '.join(menu_extracted), DOTALL)
+        mealPrice = findall(r"cena\">(.*?),", ' '.join(menu_extracted), DOTALL)
 
-        kanasTemp["Polévka 1"] = menu_courses[0] + " " + menu_prices[0]
-        kanasTemp["Polévka 2"] = menu_courses[0] + " " + menu_prices[0]
+        kanasTemp["Restaurace"] = '\n' +"**Restaurace**" + '\n'
 
-        kanasTemp["Menu 1"] = dict()
-        kanasTemp["Menu 1"]["menu"] = menu_courses[1]
-        kanasTemp["Menu 1"]["cena"] = menu_prices[1]
+        for x in range(0,17):
+            kanasTemp[x] = mealAmount[x] + ' ' + mealName[x] + ' ' + mealPrice[x] + ',-' + '\n'
+            if(x == 4):
+                kanasTemp["Jidelna"] = '\n' + "**Jidelna**" + '\n'
 
         kanas = kanasTemp
     except:
