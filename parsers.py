@@ -45,9 +45,40 @@ def GetMenuPurkynka(day):
     purkynka["Icon"] = "http://www.napurkynce.cz/ariadne/file_generators/dbfile.php?_fileId=564&_fileName=logo.png&_site=drevenaruze_purkynka"
     purkynka["CardPay"] = "Platba kartou: Ano" + '\n'
 
-        try:
+    try:
+        purkynkaTemp = purkynka
 
-        except:
-            print("Purkynka parser failed!")
+        r = get("http://www.napurkynce.cz/purkynka/denni-menu/")
+        r.encoding = 'utf-8'
 
-        return purkynka
+        soup = BeautifulSoup(r.text, "html5lib")  # Gets html code
+        menu = str(soup)
+        menu_extracted = sub(r'[\t\n\r]', '', str(menu))
+        menu_extracted = findall(r"e>Menu(.*?),-</pre", menu_extracted, DOTALL)
+
+        soups = findall(r": (.*?)<br", ' '.join(menu_extracted), DOTALL)
+        meals = findall(r"\)(.*?),-", ' '.join(menu_extracted), DOTALL)
+
+        purkynkaTemp["Polévka"] = soups[day] + '\n'
+
+        if day == 0:
+            for x in range(0,4):
+                purkynkaTemp[x] = meals[x] + ',-' + '\n'
+        if day == 1:
+            for x in range(4,8):
+                purkynkaTemp[x] = meals[x] + ',-' + '\n'
+        if day == 2:
+            for x in range(8,12):
+                purkynkaTemp[x] = meals[x] + ',-' + '\n'
+        if day == 3:
+            for x in range(12,16):
+                purkynkaTemp[x] = meals[x] + ',-' + '\n'
+        if day == 4:
+            for x in range(16,20):
+                purkynkaTemp[x] = meals[x] + ',-' + '\n'
+
+        purkynka = purkynkaTemp
+    except:
+        print("Purkynka parser failed!")
+
+    return purkynka

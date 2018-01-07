@@ -8,7 +8,7 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 from sys import exit
 from czech_holidays import holidays
-from parsers import GetMenuKanas
+from parsers import GetMenuKanas, GetMenuPurkynka
 import sys
 import argparse
 import random
@@ -56,6 +56,7 @@ if __name__ == "__main__":
 
     get_menu_func_list = [
         GetMenuKanas,
+        GetMenuPurkynka,
         PostFortuneCookie
     ]
 
