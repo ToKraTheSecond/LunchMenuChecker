@@ -8,7 +8,7 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 from sys import exit
 from czech_holidays import holidays
-from parsers import GetMenuKanasJidelna
+from parsers import GetMenuKanas
 import sys
 import argparse
 import random
@@ -68,13 +68,13 @@ if __name__ == "__main__":
     time = datetime.now().time()
 
     get_menu_func_list = [
-        GetMenuKanasJidelna,
+        GetMenuKanas,
         PostFortuneCookie
     ]
 
     if datetime.date(datetime.now()) in holidays:
         sys.exit()
-
+    
     if day == 5 or day == 6:
         sys.exit()
 

@@ -3,15 +3,15 @@ from requests import get
 from json import dumps
 from bs4 import BeautifulSoup
 
-def GetMenuKanasJidelna(day):
+def GetMenuKanas(day):
     kanasJidelna = {"url": "http://www.kanas.cz/stranka/jidelna"}
-    kanasJidelna["Name"] = "Jídelna Kansas"
+    kanasJidelna["Name"] = "Kanas"
     kanasJidelna["Info"] = "5 minut"
     kanasJidelna["Icon"] = "http://www.barber-schools.org/wp-content/uploads/2013/02/state-flag-kansas.jpg"
     kanasJidelna["CardPay"] = "Ano"
 
     try:
-        kanasJidelnaTemp = kanasJidelna
+        kanasTemp = kanas
 
         r = get("http://www.kanas.cz/stranka/jidelna")
         r.encoding = 'utf-8'
@@ -26,15 +26,15 @@ def GetMenuKanasJidelna(day):
         menu_courses = findall(r"content\">(.*?)</", menu_extracted_day[0], DOTALL)
         menu_prices = findall(r"price\">(.*?)</", menu_extracted_day[0], DOTALL)
 
-        kanasJidelnaTemp["Polévka 1"] = menu_courses[0] + " " + menu_prices[0]
-        kanasJidelnaTemp["Polévka 2"] = menu_courses[0] + " " + menu_prices[0]
+        kanasTemp["Polévka 1"] = menu_courses[0] + " " + menu_prices[0]
+        kanasTemp["Polévka 2"] = menu_courses[0] + " " + menu_prices[0]
 
-        kanasJidelnaTemp["Menu 1"] = dict()
-        kanasJidelnaTemp["Menu 1"]["menu"] = menu_courses[1]
-        kanasJidelnaTemp["Menu 1"]["cena"] = menu_prices[1]
+        kanasTemp["Menu 1"] = dict()
+        kanasTemp["Menu 1"]["menu"] = menu_courses[1]
+        kanasTemp["Menu 1"]["cena"] = menu_prices[1]
 
-        kanasJidelna = kanasJidelnaTemp
+        kanas = kanasTemp
     except:
-        print("KanasJidelna parser failed!")
+        print("Kanas parser failed!")
 
-    return kanasJidelna
+    return kanas
