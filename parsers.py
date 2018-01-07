@@ -37,3 +37,17 @@ def GetMenuKanas(day):
         print("Kanas parser failed!")
 
     return kanas
+
+def GetMenuPurkynka(day):
+    purkynka = {"url": "http://www.napurkynce.cz/purkynka/denni-menu/"}
+    purkynka["Name"] = "Na Purkyňce" + '\n'
+    purkynka["Info"] = "Cesta: 10 minut" + '\n'
+    purkynka["Icon"] = "http://www.napurkynce.cz/ariadne/file_generators/dbfile.php?_fileId=564&_fileName=logo.png&_site=drevenaruze_purkynka"
+    purkynka["CardPay"] = "Platba kartou: Ano" + '\n'
+
+        try:
+
+        except:
+            print("Purkynka parser failed!")
+
+        return purkynka
