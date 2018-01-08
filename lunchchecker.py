@@ -36,13 +36,15 @@ def PostMenu(parsed_menu_dict, url):
     """Send given menu to given Glip URL."""
     body = ''
     icon = parsed_menu_dict["Icon"]
+    name = parsed_menu_dict["Name"]
     del parsed_menu_dict["Icon"]
+    del parsed_menu_dict["Name"]
     for key in parsed_menu_dict:
         body += parsed_menu_dict[key]
 
     payload = \
         {
-         'activity': parsed_menu_dict["Name"],
+         'activity': name,
     	 'icon': icon,
     	 'body': body
         }

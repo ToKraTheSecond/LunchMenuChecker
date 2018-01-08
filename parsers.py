@@ -4,8 +4,8 @@ from json import dumps
 from bs4 import BeautifulSoup
 
 def GetMenuKanas(day):
-    kanas = {"url": "http://www.kanas.cz/stranka/jidelna"}
-    kanas["Name"] = "Kanas" + '\n'
+    kanas = {"url": "http://www.kanas.cz/stranka/jidelna" + '\n'}
+    kanas["Name"] = "Jídelna/restaurace Kanas"
     kanas["Info"] = "Cesta: 5 minut" + '\n'
     kanas["Icon"] = "http://www.barber-schools.org/wp-content/uploads/2013/02/state-flag-kansas.jpg"
     kanas["CardPay"] = "Platba kartou: Ano" + '\n'
@@ -25,7 +25,7 @@ def GetMenuKanas(day):
         mealName = findall(r"idlo\">(.*?)<", ' '.join(menu_extracted), DOTALL)
         mealPrice = findall(r"cena\">(.*?),", ' '.join(menu_extracted), DOTALL)
 
-        kanasTemp["Restaurace"] = '\n' +"**Restaurace**" + '\n'
+        kanasTemp["Restaurace"] = '\n' + "**Restaurace**" + '\n'
 
         for x in range(0,17):
             kanasTemp[x] = mealAmount[x] + ' ' + mealName[x] + ' ' + mealPrice[x] + ',-' + '\n'
@@ -39,11 +39,11 @@ def GetMenuKanas(day):
     return kanas
 
 def GetMenuPurkynka(day):
-    purkynka = {"url": "http://www.napurkynce.cz/purkynka/denni-menu/"}
-    purkynka["Name"] = "Na Purkyňce" + '\n'
+    purkynka = {"url": "http://www.napurkynce.cz/purkynka/denni-menu/" + '\n'}
+    purkynka["Name"] = "Restaurace Na Purkyňce"
     purkynka["Info"] = "Cesta: 10 minut" + '\n'
     purkynka["Icon"] = "http://www.napurkynce.cz/ariadne/file_generators/dbfile.php?_fileId=564&_fileName=logo.png&_site=drevenaruze_purkynka"
-    purkynka["CardPay"] = "Platba kartou: Ano" + '\n'
+    purkynka["CardPay"] = "Platba kartou: Ano"
 
     try:
         purkynkaTemp = purkynka
@@ -59,7 +59,7 @@ def GetMenuPurkynka(day):
         soups = findall(r": (.*?)<br", ' '.join(menu_extracted), DOTALL)
         meals = findall(r"\)(.*?),-", ' '.join(menu_extracted), DOTALL)
 
-        purkynkaTemp["Polévka"] = soups[day] + '\n'
+        purkynkaTemp["Polévka"] = '\n\n' + soups[day] + '\n'
 
         if day == 0:
             for x in range(0,4):
