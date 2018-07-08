@@ -1,4 +1,4 @@
-# Glip LunchMenuChecker for Python 3
+# Glip LunchMenuChecker
 
 Get menu from:
 - Inactive:
