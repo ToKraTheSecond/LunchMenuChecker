@@ -18,17 +18,8 @@ if __name__ == "__main__":
     day = datetime.today().weekday()
     time = datetime.now().time()
 
-    get_menu_func_list = [
-        GetMenuKanas,
-        GetMenuPurkynka,
-        PostFortuneCookie
-    ]
 
-    if datetime.date(datetime.now()) in holidays:
-        sys.exit()
 
-    if day == 5 or day == 6:
-        sys.exit()
 
     with open('gliplinks.txt') as f:
         url_list = f.readlines()
