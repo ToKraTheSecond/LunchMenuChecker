@@ -13,7 +13,7 @@ def post_fortune_cookie(fortune_cookie_url,
     if random.randint(1, 3) != 1:
         r = get(fortune_cookie_url)
         r.encoding = 'utf-8'
-        soup = BeautifulSoup(r.text, "html5lib").text
+        soup = BeautifulSoup(r.text, features="xml").text
         cookie = sub(r'[\t\n\r]', '', str(soup))
         cookie_extracted = findall(r"([A-Za-z][0-9a-zA-Z\b-';:,.()?]{15,100}[.!?\b])", cookie, DOTALL)[1]
     else:
@@ -22,8 +22,7 @@ def post_fortune_cookie(fortune_cookie_url,
     payload = \
         {
             "icon": fortune_cookie_icon_url,
-            "activity": "Fortune cookie delivery",
-            "title": "Fortune Cookie of the Day",
+            "activity": "Fortune Cookie of the Day",
             "body": cookie_extracted
         }
     headers = {'content-type': 'application/json'}
