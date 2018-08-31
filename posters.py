@@ -29,23 +29,17 @@ def post_fortune_cookie(fortune_cookie_url,
     response = post(glip_conv_url, data=dumps(payload), headers=headers)
 
 
-
-def PostMenu(parsed_menu_dict, url):
-    """Send given menu to given Glip URL."""
-    body = ''
-    icon = parsed_menu_dict["Icon"]
-    name = parsed_menu_dict["Name"]
-    del parsed_menu_dict["Icon"]
-    del parsed_menu_dict["Name"]
-    for key in parsed_menu_dict:
-        body += parsed_menu_dict[key]
+def post_menu(post_url,
+             restaurant_icon_url,
+             restaurant_name,
+             parsed_menu):
 
     payload = \
         {
-         'activity': name,
-    	 'icon': icon,
-    	 'body': body
+            "icon": restaurant_icon_url,
+            "activity": restaurant_name,
+            "body": parsed_menu
         }
 
     headers = {'content-type': 'application/json'}
-    response = post(url, data=dumps(payload), headers=headers)
+    response = post(post_url, data=dumps(payload), headers=headers)
