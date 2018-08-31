@@ -9,7 +9,8 @@ import sys
 import json
 import argparse
 
-from posters import post_fortune_cookie
+from posters import post_fortune_cookie, post_menu
+from parsers import get_menu_nepal
 
 
 if __name__ == "__main__":
@@ -33,6 +34,9 @@ if __name__ == "__main__":
                         post_url,
                         local_fortunecookies["local_fortune_cookies"])
 
+    nepal = get_menu_nepal(urls)
 
-
-
+    post_menu(post_url,
+              urls["nepal_brno_icon"],
+              nepal["Name"],
+              nepal["payload"])
