@@ -3,3 +3,6 @@
 
 ### Virtualenv folder
 lunch-checker
+
+### Python files
+__pycache__/
