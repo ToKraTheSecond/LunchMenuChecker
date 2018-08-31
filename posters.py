@@ -1,19 +1,34 @@
-def PostFortuneCookie(url):
-    """Get and post fortune cookie."""
+import random
+from bs4 import BeautifulSoup
+from requests import get, post
+from re import sub, findall, DOTALL
+from json import dumps
+
+
+def post_fortune_cookie(fortune_cookie_url,
+                        fortune_cookie_icon_url,
+                        glip_conv_url,
+                        local_fortunecookies):
+
     if random.randint(1, 3) != 1:
-        r = get("http://www.fortunecookiemessage.com")
+        r = get(fortune_cookie_url)
         r.encoding = 'utf-8'
         soup = BeautifulSoup(r.text, "html5lib").text
         cookie = sub(r'[\t\n\r]', '', str(soup))
         cookie_extracted = findall(r"([A-Za-z][0-9a-zA-Z\b-';:,.()?]{15,100}[.!?\b])", cookie, DOTALL)[1]
     else:
-        cookie_extracted = local_fortunecookie[random.randint(1, len(local_fortunecookie))][:-1]
-        print(cookie_extracted)
-    body = "\nFortune Cookie of the Day\n" \
-        + "\n**" + cookie_extracted + "**\n\n"
-    payload = {'body': body}
+        cookie_extracted = local_fortunecookies[random.randint(1, len(local_fortunecookies))][:-1]
+
+    payload = \
+        {
+            "icon": fortune_cookie_icon_url,
+            "activity": "Fortune cookie delivery",
+            "title": "Fortune Cookie of the Day",
+            "body": cookie_extracted
+        }
     headers = {'content-type': 'application/json'}
-    response = post(url, data=dumps(payload), headers=headers)
+    response = post(glip_conv_url, data=dumps(payload), headers=headers)
+
 
 
 def PostMenu(parsed_menu_dict, url):
