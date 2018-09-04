@@ -3,6 +3,16 @@ from requests import get
 from bs4 import BeautifulSoup
 
 
+def get_fortune_cookie(fortune_cookie_url):
+    r = get(fortune_cookie_url)
+    r.encoding = 'utf-8'
+    soup = BeautifulSoup(r.text, features="xml").text
+    cookie = sub(r'[\t\n\r]', '', str(soup))
+    fortune_cookie = findall(r"([A-Za-z][0-9a-zA-Z\b-';:,.()?]{15,100}[.!?\b])", cookie, DOTALL)[1]
+
+    return fortune_cookie
+
+
 def get_menu_nepal(urls):
     nepal = {"Name": "Indian and Nepalese Restaurant."}
 

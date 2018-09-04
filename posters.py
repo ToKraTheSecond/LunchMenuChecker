@@ -1,8 +1,8 @@
 import random
-from bs4 import BeautifulSoup
-from requests import get, post
-from re import sub, findall, DOTALL
+from requests import post
 from json import dumps
+
+from parsers import get_fortune_cookie
 
 
 def post_fortune_cookie(fortune_cookie_url,
@@ -11,11 +11,7 @@ def post_fortune_cookie(fortune_cookie_url,
                         local_fortunecookies):
 
     if random.randint(1, 3) != 1:
-        r = get(fortune_cookie_url)
-        r.encoding = 'utf-8'
-        soup = BeautifulSoup(r.text, features="xml").text
-        cookie = sub(r'[\t\n\r]', '', str(soup))
-        cookie_extracted = findall(r"([A-Za-z][0-9a-zA-Z\b-';:,.()?]{15,100}[.!?\b])", cookie, DOTALL)[1]
+        cookie_extracted = get_fortune_cookie(fortune_cookie_url)
     else:
         cookie_extracted = local_fortunecookies[random.randint(1, len(local_fortunecookies))][:-1]
 
