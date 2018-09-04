@@ -7,11 +7,11 @@ import sys
 """
 
 import os
-import json
 import argparse
 
 from posters import post_fortune_cookie, post_menu
 from parsers import get_menu_nepal
+from json_files_handlers import load_data_from_json_files
 
 
 if __name__ == "__main__":
@@ -19,14 +19,15 @@ if __name__ == "__main__":
     ap.add_argument("--type", required=True, help="Type of posting conversation.")
     args = vars(ap.parse_args())
 
-    with open(os.path.join('json_files', 'glip_links.json')) as file:
-        glip_links = json.load(file)
+    paths = {'glip_links_path': os.path.join('json_files', 'glip_links.json'),
+             'local_fortunecookies_path': os.path.join('json_files', 'local_fortunecookies.json'),
+             'urls_path': os.path.join('json_files', 'urls.json')}
 
-    with open(os.path.join('json_files', 'local_fortunecookies.json')) as file:
-        local_fortunecookies = json.load(file)
+    data_from_json_files = load_data_from_json_files(paths)
 
-    with open(os.path.join('json_files', 'urls.json')) as file:
-        urls = json.load(file)
+    glip_links = data_from_json_files['glip_links']
+    local_fortunecookies = data_from_json_files['local_fortucookies']
+    urls = data_from_json_files['urls']
 
     post_url = glip_links[args["type"]]
 
