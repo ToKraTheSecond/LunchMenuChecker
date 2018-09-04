@@ -6,6 +6,7 @@ from parsers import GetMenuKanas, GetMenuPurkynka
 import sys
 """
 
+import os
 import json
 import argparse
 
@@ -18,13 +19,13 @@ if __name__ == "__main__":
     ap.add_argument("--type", required=True, help="Type of posting conversation.")
     args = vars(ap.parse_args())
 
-    with open('glip_links.json') as file:
+    with open(os.path.join('json_files', 'glip_links.json')) as file:
         glip_links = json.load(file)
 
-    with open('local_fortunecookies.json') as file:
+    with open(os.path.join('json_files', 'local_fortunecookies.json')) as file:
         local_fortunecookies = json.load(file)
 
-    with open('urls.json') as file:
+    with open(os.path.join('json_files', 'urls.json')) as file:
         urls = json.load(file)
 
     post_url = glip_links[args["type"]]
