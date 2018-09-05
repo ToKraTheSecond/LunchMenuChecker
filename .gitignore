@@ -1,0 +1,8 @@
+### PyCharm files
+.idea/
+
+### Virtualenv folder
+lunch-checker
+
+### Python files
+__pycache__/
