@@ -26,7 +26,7 @@ if __name__ == "__main__":
     data_from_json_files = load_data_from_json_files(paths)
 
     glip_links = data_from_json_files['glip_links']
-    local_fortunecookies = data_from_json_files['local_fortucookies']
+    local_fortunecookies = data_from_json_files['local_fortunecookies']
     urls = data_from_json_files['urls']
 
     post_url = glip_links[args["type"]]
