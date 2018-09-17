@@ -1,5 +1,7 @@
 import json
 
+from paths import GLIP_LINKS_PATH, LOCAL_FORTUNECOOKIES_PATH, URLS_PATH
+
 
 def _get_data_from_json_file(path_to_json):
     with open(path_to_json) as file:
@@ -8,14 +10,14 @@ def _get_data_from_json_file(path_to_json):
     return data_from_json
 
 
-def load_data_from_json_files(paths):
-    with open(paths['glip_links_path']) as file:
+def load_data_from_json_files():
+    with open(GLIP_LINKS_PATH) as file:
         glip_links = json.load(file)
 
-    with open(paths['local_fortunecookies_path']) as file:
+    with open(LOCAL_FORTUNECOOKIES_PATH) as file:
         local_fortunecookies = json.load(file)
 
-    with open(paths['urls_path']) as file:
+    with open(URLS_PATH) as file:
         urls = json.load(file)
 
     return {'glip_links': glip_links,

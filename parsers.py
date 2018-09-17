@@ -16,7 +16,7 @@ def get_fortune_cookie(fortune_cookie_url):
 def get_menu_nepal(urls):
     nepal = {"Name": "Indian and Nepalese Restaurant."}
 
-    r = get(urls["nepal_brno_menu"])
+    r = get(urls.nepal_brno_menu)
     r.encoding = 'utf-8'
 
     soup = BeautifulSoup(r.text, "xml")
