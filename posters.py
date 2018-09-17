@@ -26,9 +26,9 @@ def post_fortune_cookie(fortune_cookie_url,
 
 
 def post_menu(post_url,
-             restaurant_icon_url,
-             restaurant_name,
-             parsed_menu):
+              restaurant_icon_url,
+              restaurant_name,
+              parsed_menu):
 
     payload = \
         {

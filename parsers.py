@@ -54,14 +54,15 @@ def get_menu_nepal(urls):
         if day_idx == datetime.today().weekday():
             soup_index = day_idx
             nepal["payload"] = _get_nepal_menu_payload(soup_index, main_meal_range, prices_range,
-                                                       main_meals, soups, prices)
+                                                       main_meals, soups, prices, urls.nepal_brno_menu)
 
     return nepal
 
 
 def _get_nepal_menu_payload(soup_index, main_meal_range, prices_range,
-                            main_meals, soups, prices):
-    nepal_payload = f"""{soups[soup_index]} {prices[prices_range[0]]},-,
+                            main_meals, soups, prices, restaurant_menu_link):
+    nepal_payload = f"""[Nepal weekly menu]({restaurant_menu_link})
+                        {soups[soup_index]} {prices[prices_range[0]]},-,
                         {main_meals[main_meal_range[0]]} {prices[prices_range[1]]},-,
                         {main_meals[main_meal_range[1]]} {prices[prices_range[2]]},-,
                         {main_meals[main_meal_range[2]]} {prices[prices_range[3]]},-, 
