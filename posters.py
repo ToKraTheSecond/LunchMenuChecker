@@ -10,10 +10,13 @@ def post_fortune_cookie(fortune_cookie_url,
                         glip_conv_url,
                         local_fortunecookies):
 
+    # Until parsing issue is resolved
+    '''
     if random.randint(1, 3) != 1:
         cookie_extracted = get_fortune_cookie(fortune_cookie_url)
     else:
-        cookie_extracted = local_fortunecookies[random.randint(1, len(local_fortunecookies))][:-1]
+    '''
+    cookie_extracted = local_fortunecookies[random.randint(1, len(local_fortunecookies))][:-1]
 
     payload = \
         {
