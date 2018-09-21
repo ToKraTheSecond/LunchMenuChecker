@@ -48,5 +48,6 @@
         "If somebody else can do something it doesn't mean that you can.",
         "You can never know what your loved ones really think of you.",
         "There may not be someone for you."
+		"The program 'fortune' is currently not installed. You can install it by typing: sudo apt-get install fortune-mod"
     ]
 }
