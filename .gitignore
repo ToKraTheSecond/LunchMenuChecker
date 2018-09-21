@@ -6,3 +6,6 @@ lunch-checker
 
 ### Python files
 __pycache__/
+
+### VisualCode files
+.vscode/
