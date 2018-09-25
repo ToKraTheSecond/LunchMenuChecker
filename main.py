@@ -18,12 +18,16 @@ if __name__ == "__main__":
     if not check_if_menu_can_be_posted(datetime.today().weekday(), datetime.date(datetime.now())):
         exit('Not posting on non working day')
 
-
     glip_links = SimpleNamespace(**get_glip_links(GLIP_LINKS_PATH))
     local_fortunecookies = SimpleNamespace(**get_local_fortunecookies(LOCAL_FORTUNECOOKIES_PATH))
     urls = SimpleNamespace(**get_urls(URLS_PATH))
 
-    post_url = glip_links.type
+    if args["type"] == "test_conv":
+        post_url = glip_links.test_conv
+    elif args["type"] == "post_conv":
+        post_url = glip_links.post_conv
+    else:
+        raise ValueError("wrong input argument")
 
     post_fortune_cookie(urls.fortune_cookie,
                         urls.fortune_cookie_icon,
