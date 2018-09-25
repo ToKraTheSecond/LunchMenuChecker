@@ -5,8 +5,9 @@ from datetime import datetime
 
 from posters import post_fortune_cookie, post_menu
 from parsers import get_menu_nepal
-from json_files_handlers import load_data_from_json_files
+from json_files_handlers import get_glip_links, get_local_fortunecookies, get_urls
 from correct_time_checker import check_if_menu_can_be_posted
+from paths import GLIP_LINKS_PATH, LOCAL_FORTUNECOOKIES_PATH, URLS_PATH
 
 
 if __name__ == "__main__":
@@ -17,15 +18,12 @@ if __name__ == "__main__":
     if not check_if_menu_can_be_posted(datetime.today().weekday(), datetime.date(datetime.now())):
         exit('Not posting on non working day')
 
-    data_from_json_files = load_data_from_json_files()
-    data_from_json_files = SimpleNamespace(**data_from_json_files)
 
-    glip_links = data_from_json_files.glip_links
-    local_fortunecookies = data_from_json_files.local_fortunecookies
-    urls = data_from_json_files.urls
-    urls = SimpleNamespace(**urls)
+    glip_links = SimpleNamespace(**get_glip_links(GLIP_LINKS_PATH))
+    local_fortunecookies = SimpleNamespace(**get_local_fortunecookies(LOCAL_FORTUNECOOKIES_PATH))
+    urls = SimpleNamespace(**get_urls(URLS_PATH))
 
-    post_url = glip_links[args["type"]]
+    post_url = glip_links.type
 
     post_fortune_cookie(urls.fortune_cookie,
                         urls.fortune_cookie_icon,
