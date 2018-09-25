@@ -32,7 +32,7 @@ if __name__ == "__main__":
     post_fortune_cookie(urls.fortune_cookie,
                         urls.fortune_cookie_icon,
                         post_url,
-                        local_fortunecookies["local_fortune_cookies"])
+                        local_fortunecookies.local_fortune_cookies)
 
     nepal = get_menu_nepal(urls)
 
