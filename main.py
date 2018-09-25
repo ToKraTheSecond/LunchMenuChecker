@@ -1,6 +1,7 @@
 ﻿import argparse
 from types import SimpleNamespace
 from sys import exit
+from datetime import datetime
 
 from posters import post_fortune_cookie, post_menu
 from parsers import get_menu_nepal
@@ -13,7 +14,7 @@ if __name__ == "__main__":
     ap.add_argument("--type", required=True, help="Type of posting conversation.")
     args = vars(ap.parse_args())
 
-    if not check_if_menu_can_be_posted():
+    if not check_if_menu_can_be_posted(datetime.today().weekday(), datetime.date(datetime.now())):
         exit('Not posting on non working day')
 
     data_from_json_files = load_data_from_json_files()
