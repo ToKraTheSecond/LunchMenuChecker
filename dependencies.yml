@@ -12,6 +12,7 @@ dependencies:
   - wincertstore=0.2=py36h7fe50ca_0
   - pip:
     - beautifulsoup4==4.6.3
+    - lxml==4.2.5
     - chardet==3.0.4
     - czech-holidays==0.1.3
     - idna==2.7
