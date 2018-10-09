@@ -8,7 +8,7 @@ Tested with Python 3.6.
 # Installation
 #### WIN machine
 * clone this repo
-* install dependencies via [conda/miniconda] with:
+* install dependencies via [conda/miniconda](https://www.anaconda.com/) with:
 ```
 conda env create -f dependencies.yml
 ```
