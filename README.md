@@ -1,5 +1,5 @@
 # Glip Lunch Menu Checker
-This script sends parsed restaurant lunch menuto given glip conversation via RingCentral Webhooks.
+This script sends parsed restaurant lunch menu to given glip conversation via RingCentral Webhooks.
 
 # What is glip?
 [RingCentral Glip](https://glip.com) is a free team messaging app
@@ -7,7 +7,10 @@ This script sends parsed restaurant lunch menuto given glip conversation via Rin
 # Installation
 * clone this repo
 * install dependencies from *dependencies.yml*
-* add glip webhooks links to *json_files/glip_links.json::post_conv*
+* add glip webhooks links to:
+```
+json_files/glip_links.json
+```
 
 # How to post
 * call via terminal: *python lunch_menu_checker.py --type post_conv*
