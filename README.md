@@ -18,7 +18,10 @@ json_files/glip_links.json
 ```
 
 # How to post
-* call via terminal: *python lunch_menu_checker.py --type post_conv*
+* call via terminal: 
+```
+python lunch_menu_checker.py --type post_conv
+```
 
 # Currently supported restaurants
 * [Nepal Brno](http://nepalbrno.cz/)
