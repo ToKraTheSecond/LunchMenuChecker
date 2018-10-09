@@ -1,4 +1,4 @@
-# Glip Lunch Menu Checker
+# Glip LunchMenuChecker
 This script sends parsed restaurant lunch menu to given glip conversation via RingCentral Webhooks.
 Tested with Python 3.6.
 
