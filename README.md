@@ -22,6 +22,10 @@ json_files/glip_links.json
 ```
 python lunch_menu_checker.py --type post_conv
 ```
+* it is possieble to use second webhook link - this is meant for testing purposes
+```
+python lunch_menu_checker.py --type test_conv
+```
 
 # Currently supported restaurants
 * [Nepal Brno](http://nepalbrno.cz/)
