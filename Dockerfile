@@ -1,6 +1,6 @@
 FROM python:3
 
-ADD LunchMenuChecker .
+COPY . .
 
 RUN pip install requests
 RUN pip install beautifulsoup4
